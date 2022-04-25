@@ -1,0 +1,9 @@
+body{
+  background-color: #CEE8F8;
+}
+
+.mainRegistrForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

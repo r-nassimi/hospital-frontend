@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react'
 import Registration from './components/Registration';
-import {Routes, Route, Link } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react'
 
 const App = () => {
-  const [registrated, setRegistrated] = useState(true)
+  const [registrated, setRegistrated] = useState(true);
 
   const renderRegistration = () => {
-    setRegistrated(!registrated)
-  };
+    setRegistrated(!registrated);
+  }
 
   return(
     <div className='App'>
-      <Routes>
-      <Route path='/registration' element={<Registration  registrated={registrated} setRegistrated={setRegistrated}/>}/>
-      </Routes>
+      <Registration>
+      isRegistr={ registrated }
+      setRegistrated={ setRegistrated }
+      </Registration>
     </div>
   )
 }
