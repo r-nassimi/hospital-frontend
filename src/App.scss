@@ -4,7 +4,7 @@ body {
   background-color: #C5E9FF;
 }
 
-.registrationHeader {
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -17,8 +17,9 @@ body {
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-.headerText {
+.header__text {
   display: flex;
+  justify-content: center;
   width: 560px;
   height: 55px;
   left: 210px;
@@ -30,18 +31,32 @@ body {
   margin-bottom: 50px;
 }
 
-.headerLogo {
+.header__logo {
   position: absolute;
   width: 85px;
   height: 70px;
   margin-top: 15px;
-  top: 8%;
-  left: 9%;
-  bottom: 8%;
-  right: 8%;
+  top: 10px;
+  left: 100px;
+  bottom: 20px;
 }
 
-.logoBody {
+.body{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 200px;
+  margin-top: 200px;
+}
+
+.body__logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo__big {
   width: 380px;
   height: 380px;
   margin-left: 100px;
@@ -49,29 +64,20 @@ body {
   left: 38px;
 }
 
-.registrationBody {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 400px;
-  margin-top: 200px;
-}
-
-.registrationField {
+.field {
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
   top: 160px;
   left: 540px;
   width: 400px;
-  height: 500px;
+  height: 480px;
   margin-left: 50px;
 }
 
-.loginHeader {
+.field__name {
   display: flex;
-  width: 210px;
+  width: 280px;
   height: 45px;
   top: 200px;
   left: 600px;
@@ -82,14 +88,14 @@ body {
   margin-left: 50px;
 }
 
-.loginInputs {
+.field__inputs {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: -10px;
 }
 
-.fieldContent {
+.input__name {
   margin-left: 20px;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
@@ -97,7 +103,7 @@ body {
   line-height: 21px;
 }
 
-.loginInput {
+.input__login {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,7 +118,7 @@ body {
   border-radius: 4px;
 }
 
-.passwordInput {
+.input__password {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,7 +133,7 @@ body {
   border-radius: 4px;
 }
 
-.passwordRepeatInput {
+.input__password__repeat {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,7 +148,7 @@ body {
   border-radius: 4px;
 }
 
-.registrationButtons {
+.field__buttons {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -151,7 +157,7 @@ body {
   margin-right: 50px;
 }
 
-.registrationLink {
+.button__redirect {
   display: flex;
   margin-top: 10px;
   align-items: center;
@@ -166,11 +172,11 @@ body {
   height: 40px;
 }
 
-.registrationLink:hover {
+.button__redirect:hover {
   cursor: pointer;
 }
 
-.signLink {
+.link__redirect {
   display: flex;
   width: 135px;
   height: 20px;
@@ -186,6 +192,6 @@ body {
   line-height: 20px;
 }
 
-.signLink:hover {
+.link__redirect:hover {
   cursor: pointer;
 }

@@ -1,7 +1,8 @@
-import Registration from './components/Registration';
-import { useState, useEffect, useContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import './App.scss';
+import Registration from "./components/Registration";
+import Login from "./components/Login";
+import { useState, useEffect, useContext } from "react";
+import { Routes, Route } from "react-router-dom";
+import "./App.scss";
 
 const App = () => {
   const [registrated, setRegistrated] = useState(true);
@@ -11,14 +12,23 @@ const App = () => {
   };
 
   return (
-    <div className='App'>
+    <div className="App">
       <Routes>
         <Route
-          path='/'
+          path="/registration"
           element={
             <Registration
               isRegistr={registrated}
               setRegistrated={setRegistrated}
+            />
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <Login 
+            isRegistr={registrated} 
+            setRegistrated={setRegistrated} 
             />
           }
         />
