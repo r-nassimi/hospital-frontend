@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import headerLogo from '../logos/mainLogo.svg'
-import bodyLogo from '../logos/Buildings.svg'
+import headerLogo from '../../logos/mainLogo.svg'
+import bodyLogo from '../../logos/buildings.svg'
 import './login.scss'
 
 const Login = () => {
@@ -35,33 +35,33 @@ const Login = () => {
     <div className='body-block'>
         <img className='body-block__logo' src={bodyLogo} alt='' />
       <div className='body-block__form'>
-        <h1 className='form-block__main-name'>Войти в систему</h1>
-        <div className='form-block__inputs'>
-          <div className='form-block__name'><p>Логин:</p></div>
+        <h1 className='signup-block__main-name'>Войти в систему</h1>
+        <div className='signup-block__inputs'>
+          <div className='signup-block__name'><p>Логин:</p></div>
           <input
-            className='form-block__login'
+            className='signup-block__login'
             type='text'
             placeholder='Логин'
             value={user.login}
             onChange={(e) => handleChange(e.target.value, 'login')}
           />
-          <div className='form-block__name'><p>Пароль:</p></div>
+          <div className='signup-block__name'><p>Пароль:</p></div>
           <input
-            className='form-block__password'
+            className='signup-block__password'
             type='password'
             placeholder='Пароль'
             value={user.password}
             onChange={(e) => handleChange(e.target.value, 'password')}
           />
         </div>
-        <div className='form-block__redirect'>
+        <div className='signup-block__redirect'>
           <button
-            className='form-block__authorizate'
+            className='signup-block__authorizate-button'
             onClick={() => verify(user)}
           >
             Войти
           </button>
-          <Link to='/registration' className='form-block__registrate'>Зарегистрироваться</Link>
+          <Link to='/registration' className='signup-block__registrate-link'>Зарегистрироваться</Link>
         </div>
       </div>
     </div>

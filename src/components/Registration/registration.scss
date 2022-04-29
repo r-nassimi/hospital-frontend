@@ -76,7 +76,7 @@ body {
   }
 }
 
-.form-block {
+.registration-block {
   &__main-name {
     display: flex;
     width: 280px;
@@ -158,9 +158,10 @@ body {
     margin-right: 50px;
   }
 
-  &__registration {
+  &__registration-button {
     display: flex;
     margin-top: 10px;
+    margin-left: 150px;
     align-items: center;
     justify-content: center;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -173,16 +174,16 @@ body {
     height: 40px;
   }
 
-  &__registration:hover {
+  &__registration-button:hover {
     cursor: pointer;
   }
 
-  &__authorization {
+  &__authorization-link {
     display: flex;
     width: 135px;
     height: 20px;
     margin-top: 5px;
-    margin-left: 50px;
+    margin-left: 150px;
     border: none;
     background-color: white;
     align-items: center;
@@ -193,7 +194,7 @@ body {
     line-height: 20px;
   }
 
-  &__authorization:hover {
+  &__authorization-link:hover {
     cursor: pointer;
   }
 }

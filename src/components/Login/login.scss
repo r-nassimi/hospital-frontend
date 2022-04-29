@@ -76,7 +76,7 @@ body {
   }
 }
 
-.form-block {
+.signup-block {
   &__main-name {
     display: flex;
     width: 280px;
@@ -144,7 +144,7 @@ body {
     margin-right: 50px;
   }
 
-  &__authorizate {
+  &__authorizate-button {
     display: flex;
     margin-top: 10px;
     align-items: center;
@@ -159,11 +159,11 @@ body {
     height: 40px;
   }
 
-  &__authorizate:hover {
+  &__authorizate-button:hover {
     cursor: pointer;
   }
 
-  &__registrate {
+  &__registrate-link {
     display: flex;
     width: 135px;
     height: 20px;
@@ -179,7 +179,7 @@ body {
     line-height: 20px;
   }
 
-  &__registration:hover {
+  &__registration-link:hover {
     cursor: pointer;
   }
 }

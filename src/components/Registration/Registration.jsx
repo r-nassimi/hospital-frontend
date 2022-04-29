@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import headerLogo from '../logos/mainLogo.svg';
-import bodyLogo from '../logos/Buildings.svg';
+import headerLogo from '../../logos/mainLogo.svg';
+import bodyLogo from '../../logos/buildings.svg';
 import './registration.scss'
 
 const Registration = () => {
-  const [user, setUser] = useState({
-    login: '',
-    password: '',
-    passwordRepeat: ''
-  });
+  const [user, setUser] = useState(
+    {
+      login: '',
+      password: '',
+      passwordRepeat: ''
+    }
+  );
+  const [login, password, passwordRepeat] = [user.login, user.password, user.passwordRepeat]
   const verify = (user) => {
     const rule = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/;
-      if (!(user.login.length > 5)) {
+    if (!(login.length > 5)) {
       alert(`Длина логина должна быть не менее 6 символов!`);
-    } else if (!(rule.test(user.password))) {
+    } else if (!(rule.test(password))) {
       alert(`Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!`);
-    } else if (!(user.passwordRepeat === user.password)) {
+    } else if (!(passwordRepeat === password)) {
       alert(`Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!`);
     } else {
       alert('Вы успешно зарегистрировались!');
@@ -24,56 +27,56 @@ const Registration = () => {
   };
 
   const handleChange = (value, type) => {
-    setUser({...user, [type]: value});
+    setUser({ ...user, [type]: value });
   };
 
   return (
     <div className='registration__page'>
       <div className='header-block'>
-          <img className='header-block__logo' src={headerLogo} alt='' />
+        <img className='header-block__logo' src={headerLogo} alt='' />
         <div className='header-block__text'>
           <p>Зарегистрироваться в системе</p>
         </div>
       </div>
       <div className='body-block'>
-          <img className='body-block__logo' src={bodyLogo} alt='' />
+        <img className='body-block__logo' src={bodyLogo} alt='' />
         <div className='body-block__form'>
-          <h1 className='form-block__main-name'>Регистрация</h1>
-          <div className='form-block__inputs'>
-            <div className='form-block__name'><p>Логин:</p></div>
+          <h1 className='registration-block__main-name'>Регистрация</h1>
+          <div className='registration-block__inputs'>
+            <div className='registration-block__name'><p>Логин:</p></div>
             <input
-              className='form-block__login'
+              className='registration-block__login'
               name='login'
               type='text'
               placeholder='Логин'
               value={user.login}
               onChange={(e) => handleChange(e.target.value, 'login')}
             />
-            <div className='form-block__name'><p>Пароль:</p></div>
+            <div className='registration-block__name'><p>Пароль:</p></div>
             <input
-              className='form-block__password'
+              className='registration-block__password'
               type='password'
               placeholder='Пароль'
               value={user.password}
               onChange={(e) => handleChange(e.target.value, 'password')}
             />
-            <div className='form-block__name'><p>Повторите пароль:</p></div>
+            <div className='registration-block__name'><p>Повторите пароль:</p></div>
             <input
-              className='form-block__password-repeat'
+              className='registration-block__password-repeat'
               type='password'
               placeholder='Повторите пароль'
               value={user.passwordRepeat}
               onChange={(e) => handleChange(e.target.value, 'passwordRepeat')}
             />
           </div>
-          <div className='form-block__redirect'>
+          <div className='registration-block__redirect'>
             <button
-              className='form-block__registration'
+              className='registration-block__registration-button'
               onClick={() => verify(user)}
             >
               Зарегистрироваться
             </button>
-            <Link to='/login' className='form-block__authorization'>Авторизоваться</Link>
+            <Link to='/login' className='registration-block__authorization-link'>Авторизоваться</Link>
           </div>
         </div>
       </div>
