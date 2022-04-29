@@ -1,66 +1,71 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import headerLogo from '../logos/mainLogo.svg'
 import bodyLogo from '../logos/Buildings.svg'
+import './login.scss'
 
-const Login = ({ isRegistr, setRegistrated }) => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const passwordVerify = (login, password) => {
-    const registr = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/;
-    if (registr.test(password) && login.length > 6) {
-      console.log('login sucessful!')
-    } else if (!(login.length > 6)){
-        alert(`Логин некорректен!`)
-    } else if (!(registr.test(password))){
+const Login = () => {
+  const [user, setUser] = useState({
+    login: '',
+    password: '',
+  });
+  const verify = (user) => {
+    const rule = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/;
+    if (!(user.login.length > 5)) {
+      alert(`Логин некорректен!`);
+    } else if (!(rule.test(user.password))) {
       alert(`Пароль некорректен!`);
+    } else {
+      alert('Вы успешно авторизовались!');
     }
   }
+
+  const handleChange = (value, type) => {
+    setUser({...user, [type]: value});
+  };
+
   return (
-    <div className='main__page'>
-      <div className='header'>
-        <div className='header__logo'>
-        <img className = 'logo__small' src={headerLogo} alt=''/>
-        </div>
-        <div className='header__text'><p>Войти в систему</p></div>
+    <div className='registration__page'>
+    <div className='header-block'>
+        <img className='header-block__logo' src={headerLogo} alt='' />
+      <div className='header-block__text'>
+        <p>Войти в систему</p>
       </div>
-      <div className='body'>
-        <div className='body__logo'>
-        <img className = 'logo__big' src={bodyLogo} alt=''/>
+    </div>
+    <div className='body-block'>
+        <img className='body-block__logo' src={bodyLogo} alt='' />
+      <div className='body-block__form'>
+        <h1 className='form-block__main-name'>Войти в систему</h1>
+        <div className='form-block__inputs'>
+          <div className='form-block__name'><p>Логин:</p></div>
+          <input
+            className='form-block__login'
+            type='text'
+            placeholder='Логин'
+            value={user.login}
+            onChange={(e) => handleChange(e.target.value, 'login')}
+          />
+          <div className='form-block__name'><p>Пароль:</p></div>
+          <input
+            className='form-block__password'
+            type='password'
+            placeholder='Пароль'
+            value={user.password}
+            onChange={(e) => handleChange(e.target.value, 'password')}
+          />
         </div>
-        <div className='field'>
-          <h1 className='field__name'>Войти в систему</h1>
-          <div className='field__inputs'>
-              <div className='input__name'>Логин: </div>
-            <input
-              className='input__login'
-              type='text'
-              placeholder='Логин:'
-              value={login}
-              onChange={(e) => setLogin(e.target.value)}
-            />
-            <div className='input__name'><p>Пароль:</p></div>
-            <input
-              className='input__password'
-              type='text'
-              placeholder='Пароль: '
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div className="field__buttons">
-              <button
-                className="button__redirect"
-                onClick={() => passwordVerify(login, password)}
-              >
-                Войти
-              </button>
-              <button className="link__redirect" onClick={() => setRegistrated}>
-                Зарегистрироваться
-              </button>
-            </div>
-          </div>
+        <div className='form-block__redirect'>
+          <button
+            className='form-block__authorizate'
+            onClick={() => verify(user)}
+          >
+            Войти
+          </button>
+          <Link to='/registration' className='form-block__registrate'>Зарегистрироваться</Link>
         </div>
       </div>
     </div>
+  </div>
   )
 }
 
