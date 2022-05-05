@@ -12,7 +12,7 @@ const Registration = () => {
       passwordRepeat: ''
     }
   );
-  const [login, password, passwordRepeat] = [user.login, user.password, user.passwordRepeat]
+  const { login, password, passwordRepeat } = user;
   const verify = (user) => {
     const rule = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/;
     if (!(login.length > 5)) {
@@ -49,7 +49,7 @@ const Registration = () => {
               name='login'
               type='text'
               placeholder='Логин'
-              value={user.login}
+              value={login}
               onChange={(e) => handleChange(e.target.value, 'login')}
             />
             <div className='registration-block__name'><p>Пароль:</p></div>
@@ -57,7 +57,7 @@ const Registration = () => {
               className='registration-block__password'
               type='password'
               placeholder='Пароль'
-              value={user.password}
+              value={password}
               onChange={(e) => handleChange(e.target.value, 'password')}
             />
             <div className='registration-block__name'><p>Повторите пароль:</p></div>
@@ -65,7 +65,7 @@ const Registration = () => {
               className='registration-block__password-repeat'
               type='password'
               placeholder='Повторите пароль'
-              value={user.passwordRepeat}
+              value={passwordRepeat}
               onChange={(e) => handleChange(e.target.value, 'passwordRepeat')}
             />
           </div>

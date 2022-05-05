@@ -144,7 +144,7 @@ body {
     margin-right: 50px;
   }
 
-  &__authorizate-button {
+  &__button_authorizate {
     display: flex;
     margin-top: 10px;
     align-items: center;
@@ -159,11 +159,11 @@ body {
     height: 40px;
   }
 
-  &__authorizate-button:hover {
+  &__button_authorizate:hover {
     cursor: pointer;
   }
 
-  &__registrate-link {
+  &__link_registrate {
     display: flex;
     width: 135px;
     height: 20px;
@@ -179,7 +179,7 @@ body {
     line-height: 20px;
   }
 
-  &__registration-link:hover {
+  &__link_registrate:hover {
     cursor: pointer;
   }
 }
