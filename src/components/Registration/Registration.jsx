@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import headerLogo from '../../logos/mainLogo.svg';
-import bodyLogo from '../../logos/buildings.svg';
-import './registration.scss'
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Context } from 'src/index';
+import headerLogo from 'src/logos/mainLogo.svg'
+import bodyLogo from 'src/logos/buildings.svg'
+import 'src/components/Registration/registration.scss'
 
 const Registration = () => {
   const [user, setUser] = useState(
@@ -13,17 +14,20 @@ const Registration = () => {
     }
   );
   const { login, password, passwordRepeat } = user;
-  const verify = (user) => {
-    const rule = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/;
-    if (!(login.length > 5)) {
+  const { store } = useContext(Context);
+  const navigate = useNavigate();
+  const rule = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/;
+  const verify = async (user) => {
+    if (login.length < 6) {
       alert(`Длина логина должна быть не менее 6 символов!`);
     } else if (!(rule.test(password))) {
       alert(`Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!`);
-    } else if (!(passwordRepeat === password)) {
+    } else if (passwordRepeat !== password) {
       alert(`Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!`);
     } else {
-      alert('Вы успешно зарегистрировались!');
-    }
+      await store.registration(login, password);
+      navigate('/reception');
+    };
   };
 
   const handleChange = (value, type) => {
@@ -72,11 +76,11 @@ const Registration = () => {
           <div className='registration-block__redirect'>
             <button
               className='registration-block__registration-button'
-              onClick={() => verify(user)}
+              onClick={() => verify(login, password)}
             >
               Зарегистрироваться
             </button>
-            <Link to='/login' className='registration-block__authorization-link'>Авторизоваться</Link>
+            <Link to='/login' className='registration-block__authorization-link' onClick={() => store.changeMethod()}>Авторизоваться</Link>
           </div>
         </div>
       </div>
