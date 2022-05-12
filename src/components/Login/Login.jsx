@@ -21,18 +21,13 @@ const Login = () => {
     }
     if (!validationPassword(password)) {
       return alert(`Пароль некорректен!`);
-    } return await store.login(login, password);
+    }
+    return await store.login(login, password);
   };
 
   const handleChange = (value, type) => {
     setUser({ ...user, [type]: value });
   };
-
-  useEffect(() => {
-    if (localStorage.getItem('token'))
-      navigate('/reception');
-  }, []);
-
 
   return (
     <div className='login__page'>

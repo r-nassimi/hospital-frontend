@@ -28,7 +28,7 @@ const Registration = () => {
     if (passwordRepeat !== password) {
       return alert(`Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!`);
     }
-    await store.registration(login, password);
+    return await store.registration(login, password);
   };
 
   const handleChange = (value, type) => {
