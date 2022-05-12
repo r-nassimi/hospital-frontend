@@ -2,17 +2,17 @@ import axios from 'axios';
 
 export const API_URL = `http://localhost:5000`;
 
-const Adress = axios.create({
+const api = axios.create({
   withCredentials: true,
   baseUrl: API_URL
 });
 
-Adress.interceptors.request.use((config) => {
+api.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 })
 
-Adress.interceptors.response.use((config) => {
+api.interceptors.response.use((config) => {
   return config;
 },
   async (error) => {
@@ -21,8 +21,8 @@ Adress.interceptors.response.use((config) => {
       request._isRetry = true;
       try {
         const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
-        localStorage.setItem('token', response.data.AcessToken);
-        return Adress.request(request);
+        localStorage.setItem('token', response.data.accessToken);
+        return api.request(request);
       } catch (e) {
         console.error(e, 'Не авторизован!');
       }
@@ -32,4 +32,4 @@ Adress.interceptors.response.use((config) => {
   },
 );
 
-export default Adress;
+export default api;

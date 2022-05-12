@@ -1,14 +1,14 @@
 import { makeAutoObservable } from "mobx";
-import authService from "src/components/Services/Authorization-service";
 import axios from "axios";
-import { API_URL } from "src/components/Adress/Adress";
+import AuthService from "src/services/AuthorizationService";
+import { API_URL } from "src/api";
 
 export default class Store {
   user = {};
-  Authorizated = false;
-  Registrated = false;
-  Loading = false;
-  Errors = '';
+  authorizated = false;
+  registrated = false;
+  loading = false;
+  errors = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -18,29 +18,29 @@ export default class Store {
     this.user = user;
   }
 
-  setAuthorizated(bool) {
-    this.Authorizated = bool;
+  setRegistrated(boolean) {
+    this.registrated = boolean;
   }
 
-  setLoading(bool) {
-    this.Loading = bool;
+  setAuthorizated(boolean) {
+    this.authorizated = boolean;
+  }
+
+  setLoading(boolean) {
+    this.loading = boolean;
   }
 
   setErrors(error) {
-    this.Errors = error;
-  }
-
-  setRegistrated(bool) {
-    this.Registrated = bool;
+    this.errors = error;
   }
 
   async changeMethod() {
-    this.setRegistrated(!this.Registrated)
+    this.setRegistrated(!this.registrated)
   }
 
   async registration(login, password) {
     try {
-      const response = await authService.registration(login, password);
+      const response = await AuthService.registration(login, password);
       localStorage.setItem('token', response.data.accessToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
@@ -52,7 +52,7 @@ export default class Store {
 
   async login(login, password) {
     try {
-      const response = await authService.Login(login, password);
+      const response = await AuthService.login(login, password);
       localStorage.setItem('token', response.data.accessToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
@@ -62,28 +62,28 @@ export default class Store {
     }
   }
 
-  async logout(login, password) {
+  async logout() {
     try {
-      const response = await authService.logout();
+      const response = await AuthService.logout();
       localStorage.removeItem('token');
       this.setAuthorizated(false);
       this.setUser({});
     } catch (e) {
-      console.log(e.response?.data?.message);
+      alert(e.response?.data?.message);
     }
   }
 
   async checkAuthorization() {
-    this.Loading(true);
+    this.setLoading(true);
     try {
       const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
       localStorage.setItem('token', response.data.accessToken);
-      this.Authorizated(true);
-      this.user(response.data.user);
+      this.setAuthorizated(true);
+      this.setUser(response.data.user);
     } catch (e) {
-      console.log(e);
+      alert(e);
     } finally {
-      this.Loading(false);
+      this.setLoading(false);
     }
   }
 }

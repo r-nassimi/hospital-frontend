@@ -1,8 +1,8 @@
 import { createContext } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
-import Store from "src/components/Store/Store";
-import App from "./App";
+import Store from "src/store/store";
+import App from "./App/App";
 
 const store = new Store();
 
