@@ -8,7 +8,7 @@ export default class Store {
   authorizated = false;
   registrated = false;
   loading = false;
-  errors = '';
+  errors = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -35,37 +35,42 @@ export default class Store {
   }
 
   async changeMethod() {
-    this.setRegistrated(!this.registrated)
+    this.setRegistrated(!this.registrated);
   }
 
   async registration(login, password) {
     try {
-      const response = await AuthService.registration(login, password);
-      localStorage.setItem('token', response.data.accessToken);
+      const response = await AuthService.registration(
+        login,
+        password
+      );
+      localStorage.setItem("token", response.data.accessToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
       this.setErrors(false);
     } catch (e) {
-      this.setErrors(`Пользователь с логином ${login} уже существует!`)
+      this.setErrors(
+        `Пользователь с логином ${login} уже существует!`
+      );
     }
   }
 
   async login(login, password) {
     try {
       const response = await AuthService.login(login, password);
-      localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem("token", response.data.accessToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
-      this.setErrors(false)
+      this.setErrors(false);
     } catch (e) {
-      this.setErrors('Данный пользователь не существует!');
+      this.setErrors("Данный пользователь не существует!");
     }
   }
 
   async logout() {
     try {
       const response = await AuthService.logout();
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       this.setAuthorizated(false);
       this.setUser({});
     } catch (e) {
@@ -76,8 +81,10 @@ export default class Store {
   async checkAuthorization() {
     this.setLoading(true);
     try {
-      const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
-      localStorage.setItem('token', response.data.accessToken);
+      const response = await axios.get(`${API_URL}/refresh`, {
+        withCredentials: true,
+      });
+      localStorage.setItem("token", response.data.accessToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
     } catch (e) {

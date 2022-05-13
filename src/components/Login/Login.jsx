@@ -18,14 +18,14 @@ const Login = () => {
   const verifyValidationForm = async (user) => {
     if (login.length < 6) {
       return alert(`Логин некорректен!`);
-    }
+    } 
     if (!validationPassword(password)) {
       return alert(`Пароль некорректен!`);
-    }
+    } 
     return await store.login(login, password);
   };
 
-  const handleChange = (value, type) => {
+   const handleChange = (value, type) => {
     setUser({ ...user, [type]: value });
   };
 
@@ -60,12 +60,12 @@ const Login = () => {
             />
           </div>
           <div className='login-block__redirect'>
-            <button
-              className='login-block__authorizate-button'
-              onClick={() => verifyValidationForm(login, password)}
-            >
-              Войти
-            </button>
+              <button
+                className='login-block__authorizate-button'
+                onClick={() => verifyValidationForm(login, password)}
+              >
+                Войти
+              </button>
             <Link to='/registration'
               className='login-block__registrate-link'
               onClick={() => store.changeMethod()}>

@@ -8,12 +8,6 @@ import 'src/App/app.scss'
 const App = () => {
   const { store } = useContext(Context);
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      store.checkAuthorization();
-    }
-  }, []);
-
   return (
     <div className="App">
       <Routes>
@@ -26,4 +20,3 @@ const App = () => {
 };
 
 export default App;
-
