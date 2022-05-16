@@ -60,7 +60,7 @@ export default class Store {
       this.setAuthorizated(false);
       this.setUser({});
     } catch (e) {
-      alert(e.response?.data?.message);
+      this.setErrors(e.response?.data?.message);
     }
   }
 
@@ -74,7 +74,7 @@ export default class Store {
       this.setAuthorizated(true);
       this.setUser(response.data.user);
     } catch (e) {
-      alert(e);
+      this.setErrors(e);
     } finally {
       this.setLoading(false);
     }

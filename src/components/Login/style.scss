@@ -9,9 +9,7 @@
   left: 0px;
   top: 0px;
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
-}
 
-.login-header {
   &__text {
     display: flex;
     justify-content: center;
@@ -44,9 +42,7 @@
   justify-content: space-between;
   margin: 200px;
   margin-top: 200px;
-}
 
-.login-block {
   &__logo {
     display: flex;
     align-items: center;
