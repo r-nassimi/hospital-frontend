@@ -1,18 +1,16 @@
-import axios from "axios";
-// import api from "src/api"; api removed to fix
+//Static properties are properties of a class, not of an instance of a class.
+import api from "src/api";
 
 export default class AuthService {
   static async registration (login, password) {
-    axios.post ("http://localhost:5000/registration", { login, password });
+    return api.post ("/registration", { login, password });
   }
 
   static async login (login, password) {
-    axios.post ("http://localhost:5000/login", { login, password });
+    return api.post ("/login", { login, password });
   }
 
   static async logout () {
-    axios.post ("http://localhost:5000/logout");
+    return api.post ("/logout");
   }
 }
-
-//Static properties are properties of a class, not of an instance of a class.
