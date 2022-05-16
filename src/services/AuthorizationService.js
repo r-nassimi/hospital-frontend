@@ -3,15 +3,15 @@ import axios from "axios";
 
 export default class AuthService {
   static async registration (login, password) {
-    return axios.post ("http://localhost:5000/registration", { login, password });
+    axios.post ("http://localhost:5000/registration", { login, password });
   }
 
   static async login (login, password) {
-    return axios.post ("http://localhost:5000/login", { login, password });
+    axios.post ("http://localhost:5000/login", { login, password });
   }
 
   static async logout () {
-    return axios.post ("http://localhost:5000/logout");
+    axios.post ("http://localhost:5000/logout");
   }
 }
 

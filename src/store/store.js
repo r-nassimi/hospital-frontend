@@ -1,4 +1,3 @@
-import { makeAutoObservable } from "mobx";
 import axios from "axios";
 import AuthService from "src/services/AuthorizationService";
 import { API_URL } from "src/api";
@@ -6,20 +5,11 @@ import { API_URL } from "src/api";
 export default class Store {
   user = {};
   authorizated = false;
-  registrated = false;
   loading = false;
   errors = "";
 
-  constructor() {
-    makeAutoObservable(this);
-  }
-
   setUser(user) {
     this.user = user;
-  }
-
-  setRegistrated(boolean) {
-    this.registrated = boolean;
   }
 
   setAuthorizated(boolean) {
@@ -32,10 +22,6 @@ export default class Store {
 
   setErrors(error) {
     this.errors = error;
-  }
-
-  async changeMethod() {
-    this.setRegistrated(!this.registrated);
   }
 
   async registration(login, password) {

@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Context } from 'src/index';
 import { validationPassword } from 'src/helper/helper-validate';
 import 'src/components/Registration/style.scss';
@@ -17,18 +17,20 @@ const Registration = () => {
   );
   const { login, password, passwordRepeat } = user;
   const { store } = useContext(Context);
-  const navigate = useNavigate();
   const verifyValidationForm = async (user) => {
     if (login.length < 6) {
-      return alert(`Длина логина должна быть не менее 6 символов!`);
+      alert(`Длина логина должна быть не менее 6 символов!`);
+      return;
     }
     if (!validationPassword(password)) {
-      return alert(`Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!`);
+      alert(`Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!`);
+      return;
     }
     if (passwordRepeat !== password) {
-      return alert(`Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!`);
+      alert(`Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!`);
+      return;
     }
-    return await store.registration(login, password);
+    await store.registration(login, password);
   };
 
   const handleChange = (value, type) => {
@@ -81,7 +83,11 @@ const Registration = () => {
             >
               Зарегистрироваться
             </button>
-            <Link to='/login' className='registration-form__authorization-link' onClick={() => store.changeMethod()}>Авторизоваться</Link>
+            <Link to='/login'
+              className='registration-form__authorization-link'
+            >
+              Авторизоваться
+            </Link>
           </div>
         </div>
       </div>

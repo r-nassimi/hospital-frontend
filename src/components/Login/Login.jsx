@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Context } from 'src/index';
 import { validationPassword } from 'src/helper/helper-validate';
 import 'src/components/Login/style.scss';
@@ -14,18 +14,19 @@ const Login = () => {
   });
   const { login, password } = user;
   const { store } = useContext(Context);
-  const navigate = useNavigate();
   const verifyValidationForm = async (user) => {
     if (login.length < 6) {
-      return alert(`Логин некорректен!`);
-    } 
+      alert(`Логин некорректен!`);
+      return;
+    }
     if (!validationPassword(password)) {
-      return alert(`Пароль некорректен!`);
-    } 
-    return await store.login(login, password);
+      alert(`Пароль некорректен!`);
+      return;
+    }
+    await store.login(login, password);
   };
 
-   const handleChange = (value, type) => {
+  const handleChange = (value, type) => {
     setUser({ ...user, [type]: value });
   };
 
@@ -60,15 +61,15 @@ const Login = () => {
             />
           </div>
           <div className='login-block__redirect'>
-              <button
-                className='login-block__authorizate-button'
-                onClick={() => verifyValidationForm(login, password)}
-              >
-                Войти
-              </button>
+            <button
+              className='login-block__authorizate-button'
+              onClick={() => verifyValidationForm(login, password)}
+            >
+              Войти
+            </button>
             <Link to='/registration'
               className='login-block__registrate-link'
-              onClick={() => store.changeMethod()}>
+            >
               Зарегистрироваться
             </Link>
           </div>
