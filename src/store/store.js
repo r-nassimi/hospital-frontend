@@ -60,7 +60,7 @@ export default class Store {
       this.setAuthorizated(false);
       this.setUser({});
     } catch (e) {
-      this.setErrors(e.response?.data?.message);
+      this.setErrors(e.response?.data?.message); //(?) is chaining operator
     }
   }
 
