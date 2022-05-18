@@ -8,6 +8,7 @@ import 'src/components/Registration/style.scss';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
 
+
 const Registration = () => {
   const [user, setUser] = useState(
     {
@@ -52,9 +53,9 @@ const Registration = () => {
   return (
     <div className='registration__page'>
       <div className='registration-header'>
-        <Snackbar
-          open={snackOpen}
-          onClose={handleClose}
+      <Snackbar
+        open={snackOpen}
+        onClose={handleClose}
         >
           <Alert severity='error'>{snackText}</Alert>
         </Snackbar>
@@ -112,5 +113,5 @@ const Registration = () => {
     </div>
   );
 };
-
+     
 export default Registration;

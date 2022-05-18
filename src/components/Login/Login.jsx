@@ -25,7 +25,7 @@ const Login = () => {
   const handleClose = (value, type) => {
     setSnackOpen(false);
   };
-
+  
   const verifyValidationForm = async (user) => {
     if (login.length < 6) {
       setSnackText('Логин некорректен!');
@@ -46,8 +46,8 @@ const Login = () => {
     <div className='login__page'>
       <div className='login-header'>
         <Snackbar
-          open={snackOpen}
-          onClose={handleClose}
+        open={snackOpen}
+        onClose={handleClose}
         >
           <Alert severity='error'>{snackText}</Alert>
         </Snackbar>

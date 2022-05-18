@@ -2,6 +2,7 @@ import axios from "axios";
 import AuthService from "src/services/AuthorizationService";
 import { API_URL } from "src/constants";
 
+
 export default class Store {
   user = {};
   authorizated = false;
@@ -87,9 +88,9 @@ export default class Store {
       const response = await axios.get(`${API_URL}/refresh`, {
         withCredentials: true,
       });
-      localStorage.setItem("token", response.data.accessToken);
+      localStorage.setItem('token', response.data.accessToken);
     } catch (e) {
-      alert("Не авторизован");
+      alert('Не авторизован');
       localStorage.clear();
     }
   }
