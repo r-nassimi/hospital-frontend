@@ -60,7 +60,9 @@ export default class Store {
       this.setAuthorizated(false);
       this.setUser({});
     } catch (e) {
-      this.setErrors(e.response?.data?.message); //(?) is chaining operator
+
+      //(?) is chaining operator. It provides a way to make simplify access to values ​​when it is possible.
+      this.setErrors(e.response?.data?.message);
     }
   }
 

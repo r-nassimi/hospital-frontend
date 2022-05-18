@@ -29,6 +29,8 @@ api.interceptors.response.use(
       await refresh();
       return api.request(originalRequest);
     } else {
+
+      //It is used to create exceptions. In this code, after the if condition, an exception is thrown in the form of an error
       throw error;
     }
   }
