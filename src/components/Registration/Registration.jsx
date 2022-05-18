@@ -1,13 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 import { Context } from 'src/index';
-import { validationPassword } from 'src/helper/helper-validate';
+import { validationLogin, validationPassword } from 'src/helper/helper-validate';
+import Snackbars from 'src/Snackbars/Snackbars';
 import 'src/components/Registration/style.scss';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
-
 
 const Registration = () => {
   const [user, setUser] = useState(
@@ -21,29 +19,22 @@ const Registration = () => {
   const [snackText, setSnackText] = useState('');
   const [snackOpen, setSnackOpen] = useState(false);
   const { store } = useContext(Context);
-
-  const Alert = React.forwardRef(function warning(props, ref) {
-    return <MuiAlert elevation={5} ref={ref} {...props} />
-  });
-
-  const handleClose = (value, type) => {
-    setSnackOpen(false);
-  };
+  const openSnackbar = (message) => {
+    setSnackOpen(true);
+    setSnackText(message);
+  }
 
   const verifyValidationForm = async (user) => {
-    if (login.length < 6) {
-      setSnackText('Логин должен содержать не менее 6 символов!');
-      setSnackOpen(true);
+    if (!validationLogin(login) && login.length < 6) {
+      openSnackbar('Логин должен содержать не менее 6 символов!');
     }
-    if (!validationPassword(password)) {
-      setSnackText('Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!');
-      setSnackOpen(true);
+    if (!validationPassword(password) && password.length < 6) {
+      openSnackbar('Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!');
     }
     if (passwordRepeat !== password) {
-      setSnackText('Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!');
-      setSnackOpen(true);
+      openSnackbar('Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!');
     }
-    await store.registration(login, password);
+      await store.registration(login, password);
   };
 
   const handleChange = (value, type) => {
@@ -53,12 +44,11 @@ const Registration = () => {
   return (
     <div className='registration__page'>
       <div className='registration-header'>
-      <Snackbar
-        open={snackOpen}
-        onClose={handleClose}
-        >
-          <Alert severity='error'>{snackText}</Alert>
-        </Snackbar>
+      <Snackbars
+        snackText={snackText}
+        snackOpen={snackOpen}
+        setSnackOpen={setSnackOpen} 
+        />
         <img className='registration-header__logo' src={headerLogo} alt='' />
         <div className='registration-header__text'>
           <p>Зарегистрироваться в системе</p>
@@ -76,7 +66,7 @@ const Registration = () => {
               type='text'
               placeholder='Логин'
               value={login}
-              onChange={(e) => handleChange(e.target.value.replace(/\s/g, ""), 'login')}
+              onChange={(e) => handleChange(e.target.value, 'login')}
             />
             <div className='input-block__name'><p>Пароль:</p></div>
             <input
@@ -84,7 +74,7 @@ const Registration = () => {
               type='password'
               placeholder='Пароль'
               value={password}
-              onChange={(e) => handleChange(e.target.value.replace(/\s/g, ""), 'password')}
+              onChange={(e) => handleChange(e.target.value, 'password')}
             />
             <div className='input-block__name'><p>Повторите пароль:</p></div>
             <input
@@ -92,13 +82,13 @@ const Registration = () => {
               type='password'
               placeholder='Повторите пароль'
               value={passwordRepeat}
-              onChange={(e) => handleChange(e.target.value.replace(/\s/g, ""), 'passwordRepeat')}
+              onChange={(e) => handleChange(e.target.value, 'passwordRepeat')}
             />
           </div>
           <div className='form-block__redirect'>
             <button
               className='redirect-block__registration'
-              onClick={() => verifyValidationForm(login, password)}
+              onClick={() => verifyValidationForm(user)}
             >
               Зарегистрироваться
             </button>

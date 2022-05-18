@@ -61,9 +61,7 @@ export default class Store {
       this.setAuthorizated(false);
       this.setUser({});
     } catch (e) {
-
-      //(?) is chaining operator. It provides a way to make simplify access to values ​​when it is possible.
-      this.setErrors(e.response?.data?.message);
+      this.setErrors(e.response?.data?.message); //(?) is chaining operator
     }
   }
 
@@ -92,6 +90,7 @@ export default class Store {
     } catch (e) {
       alert('Не авторизован');
       localStorage.clear();
+      this.setUser({});
     }
-  }
+  };
 }

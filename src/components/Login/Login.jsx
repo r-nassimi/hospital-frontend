@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 import { Context } from 'src/index';
-import { validationPassword } from 'src/helper/helper-validate';
+import { validationLogin, validationPassword } from 'src/helper/helper-validate';
+import Snackbars from 'src/Snackbars/Snackbars';
 import 'src/components/Login/style.scss';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
@@ -18,22 +17,21 @@ const Login = () => {
   const [snackOpen, setSnackOpen] = useState(false);
   const { store } = useContext(Context);
 
-  const Alert = React.forwardRef(function warning(props, ref) {
-    return <MuiAlert elevation={5} ref={ref} {...props} />
-  });
+  const openSnackbar = (text) => {
+    setSnackOpen(true);
+    setSnackText(text);
+  }
 
   const handleClose = (value, type) => {
     setSnackOpen(false);
   };
   
   const verifyValidationForm = async (user) => {
-    if (login.length < 6) {
-      setSnackText('Логин некорректен!');
-      setSnackOpen(true);
+    if (!validationLogin(login)) {
+      openSnackbar('Логин некорректен!');
     }
     if (!validationPassword(password)) {
-      setSnackText('Пароль некорректен!');
-      setSnackOpen(true);
+      openSnackbar('Пароль некорректен!');
     }
     await store.login(login, password);
   };
@@ -45,12 +43,11 @@ const Login = () => {
   return (
     <div className='login__page'>
       <div className='login-header'>
-        <Snackbar
-        open={snackOpen}
-        onClose={handleClose}
-        >
-          <Alert severity='error'>{snackText}</Alert>
-        </Snackbar>
+      <Snackbars
+        snackText={snackText}
+        snackOpen={snackOpen}
+        setSnackOpen={setSnackOpen} 
+        />
         <img className='login-header__logo' src={headerLogo} alt='' />
         <div className='login-header__text'>
           <p>Войти в систему</p>
@@ -67,7 +64,7 @@ const Login = () => {
               type='text'
               placeholder='Логин'
               value={login}
-              onChange={(e) => handleChange(e.target.value.replace(/\s/g, ""), 'login')}
+              onChange={(e) => handleChange(e.target.value, 'login')}
             />
             <div className='inputs-block__name'><p>Пароль:</p></div>
             <input
@@ -75,7 +72,7 @@ const Login = () => {
               type='password'
               placeholder='Пароль'
               value={password}
-              onChange={(e) => handleChange(e.target.value.replace(/\s/g, ""), 'password')}
+              onChange={(e) => handleChange(e.target.value, 'password')}
             />
           </div>
           <div className='form-block__redirect'>

@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { Context } from 'src/index';
 import { API_URL } from "src/constants";
-import refresh from 'src/store/store';
+import { useContext } from 'react';
+
 
 const api = axios.create({
   baseURL: API_URL,
@@ -13,19 +15,17 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use((config) => {
     return config;
-  }, async (error) => {
+  }, async (error) => { 
+    const { store } = useContext(Context);
     const originalRequest = error.config;
-
-    if (error.response.status === 401 && error.config && !originalRequest._isRetry) {
+    if (error.response.status === 401 && originalRequest && !originalRequest._isRetry) {
       originalRequest._isRetry = true;
-      await refresh();
+      await store.refresh();
       return api.request(originalRequest);
-    } else {
-
-      //It is used to create exceptions. In this code, after the if condition, an exception is thrown in the form of an error
+    } else { 
       throw error;
     }
   } 
 );
 
-export default api;
+export default api; 
