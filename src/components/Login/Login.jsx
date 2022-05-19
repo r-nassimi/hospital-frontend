@@ -22,16 +22,14 @@ const Login = () => {
     setSnackText(text);
   }
 
-  const handleClose = (value, type) => {
-    setSnackOpen(false);
-  };
-  
   const verifyValidationForm = async (user) => {
     if (!validationLogin(login)) {
       openSnackbar('Логин некорректен!');
+      return;
     }
     if (!validationPassword(password)) {
       openSnackbar('Пароль некорректен!');
+      return;
     }
     await store.login(login, password);
   };
@@ -43,10 +41,10 @@ const Login = () => {
   return (
     <div className='login__page'>
       <div className='login-header'>
-      <Snackbars
-        snackText={snackText}
-        snackOpen={snackOpen}
-        setSnackOpen={setSnackOpen} 
+        <Snackbars
+          snackText={snackText}
+          snackOpen={snackOpen}
+          setSnackOpen={setSnackOpen}
         />
         <img className='login-header__logo' src={headerLogo} alt='' />
         <div className='login-header__text'>

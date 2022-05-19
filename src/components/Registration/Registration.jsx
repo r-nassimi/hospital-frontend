@@ -27,14 +27,17 @@ const Registration = () => {
   const verifyValidationForm = async (user) => {
     if (!validationLogin(login) && login.length < 6) {
       openSnackbar('Логин должен содержать не менее 6 символов!');
+      return;
     }
     if (!validationPassword(password) && password.length < 6) {
       openSnackbar('Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!');
+      return;
     }
     if (passwordRepeat !== password) {
       openSnackbar('Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!');
+      return;
     }
-      await store.registration(login, password);
+    await store.registration(login, password);
   };
 
   const handleChange = (value, type) => {
@@ -44,10 +47,10 @@ const Registration = () => {
   return (
     <div className='registration__page'>
       <div className='registration-header'>
-      <Snackbars
-        snackText={snackText}
-        snackOpen={snackOpen}
-        setSnackOpen={setSnackOpen} 
+        <Snackbars
+          snackText={snackText}
+          snackOpen={snackOpen}
+          setSnackOpen={setSnackOpen}
         />
         <img className='registration-header__logo' src={headerLogo} alt='' />
         <div className='registration-header__text'>
@@ -103,5 +106,5 @@ const Registration = () => {
     </div>
   );
 };
-     
+
 export default Registration;
