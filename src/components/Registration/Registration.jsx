@@ -8,13 +8,11 @@ import bodyLogo from 'src/logos/buildings.svg';
 import 'src/components/Registration/style.scss';
 
 const Registration = () => {
-  const [user, setUser] = useState(
-    {
-      login: '',
-      password: '',
-      passwordRepeat: ''
-    }
-  );
+  const [user, setUser] = useState({
+    login: '',
+    password: '',
+    passwordRepeat: ''
+  });
   const { login, password, passwordRepeat } = user;
   const [snackText, setSnackText] = useState('');
   const [snackOpen, setSnackOpen] = useState(false);
