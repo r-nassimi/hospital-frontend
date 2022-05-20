@@ -12,6 +12,6 @@ export default class AuthService {
   }
 
   static async logout () {
-    return api.post ("/logout");
+    return api.get ("/logout");
   };
 }

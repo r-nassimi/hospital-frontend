@@ -1,8 +1,6 @@
-import axios from 'axios';
-import { Context } from 'src/index';
+import axios from 'axios'
 import { API_URL } from "src/constants";
-import { useContext } from 'react';
-
+import Store from 'src/store/store'
 
 const api = axios.create({
   baseURL: API_URL,
@@ -16,11 +14,10 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use((config) => {
     return config;
   }, async (error) => { 
-    const { store } = useContext(Context);
     const originalRequest = error.config;
     if (error.response.status === 401 && originalRequest && !originalRequest._isRetry) {
       originalRequest._isRetry = true;
-      await store.refresh();
+      await Store.refresh();
       return api.request(originalRequest);
     } else { 
       throw error;
@@ -28,4 +25,4 @@ api.interceptors.response.use((config) => {
   } 
 );
 
-export default api;  
+export default api; 

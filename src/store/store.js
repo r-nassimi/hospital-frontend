@@ -2,7 +2,6 @@ import axios from "axios";
 import AuthService from "src/services/AuthorizationService";
 import { API_URL } from "src/constants";
 
-
 export default class Store {
   user = {};
   authorizated = false;
@@ -61,7 +60,7 @@ export default class Store {
       this.setAuthorizated(false);
       this.setUser({});
     } catch (e) {
-      this.setErrors(e.response?.data?.message); //(?) is chaining operator
+      this.setErrors(e.response.data.message);
     }
   }
 
@@ -88,7 +87,7 @@ export default class Store {
       });
       localStorage.setItem('token', response.data.accessToken);
     } catch (e) {
-      alert('Не авторизован');
+      this.setErrors('Не авторизован!')
       localStorage.clear();
       this.setUser({});
     }

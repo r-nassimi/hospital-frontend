@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from 'src/index';
-import { validationLogin, validationPassword } from 'src/helper/helper-validate';
+import { validationString } from 'src/helper/helper-validate';
 import Snackbars from 'src/Snackbars/Snackbars';
-import 'src/components/Login/style.scss';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
+import 'src/components/Login/style.scss';
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -23,11 +23,11 @@ const Login = () => {
   }
 
   const verifyValidationForm = async (user) => {
-    if (!validationLogin(login)) {
+    if (!validationString(login)) {
       openSnackbar('Логин некорректен!');
       return;
     }
-    if (!validationPassword(password)) {
+    if (!validationString(password)) {
       openSnackbar('Пароль некорректен!');
       return;
     }
@@ -39,12 +39,12 @@ const Login = () => {
   };
 
   return (
-    <div className='login__page'>
+    <div className='login-page'>
       <div className='login-header'>
-        <Snackbars
-          snackText={snackText}
-          snackOpen={snackOpen}
-          setSnackOpen={setSnackOpen}
+      <Snackbars
+        snackText={snackText}
+        snackOpen={snackOpen}
+        setSnackOpen={setSnackOpen} 
         />
         <img className='login-header__logo' src={headerLogo} alt='' />
         <div className='login-header__text'>
@@ -53,12 +53,12 @@ const Login = () => {
       </div>
       <div className='login-block'>
         <img className='login-block__logo' src={bodyLogo} alt='' />
-        <div className='login-block__form'>
+        <div className='form-block'>
           <h1 className='form-block__main-name'>Войти в систему</h1>
-          <div className='form-block__inputs'>
+          <div className='inputs-block'>
             <div className='inputs-block__name'><p>Логин:</p></div>
             <input
-              className='input-block__login'
+              className='inputs-block__login'
               type='text'
               placeholder='Логин'
               value={login}
@@ -73,7 +73,7 @@ const Login = () => {
               onChange={(e) => handleChange(e.target.value, 'password')}
             />
           </div>
-          <div className='form-block__redirect'>
+          <div className='redirect-block'>
             <button
               className='redirect-block__authorizate'
               onClick={() => verifyValidationForm(login, password)}

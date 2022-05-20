@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from 'src/index';
-import { validationLogin, validationPassword } from 'src/helper/helper-validate';
+import { validationString } from 'src/helper/helper-validate';
 import Snackbars from 'src/Snackbars/Snackbars';
-import 'src/components/Registration/style.scss';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
+import 'src/components/Registration/style.scss';
 
 const Registration = () => {
   const [user, setUser] = useState(
@@ -19,17 +19,18 @@ const Registration = () => {
   const [snackText, setSnackText] = useState('');
   const [snackOpen, setSnackOpen] = useState(false);
   const { store } = useContext(Context);
+
   const openSnackbar = (message) => {
     setSnackOpen(true);
     setSnackText(message);
   }
 
   const verifyValidationForm = async (user) => {
-    if (!validationLogin(login) && login.length < 6) {
+    if (!validationString(login)) {
       openSnackbar('Логин должен содержать не менее 6 символов!');
       return;
     }
-    if (!validationPassword(password) && password.length < 6) {
+    if (!validationString(password)) {
       openSnackbar('Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!');
       return;
     }
@@ -45,7 +46,7 @@ const Registration = () => {
   };
 
   return (
-    <div className='registration__page'>
+    <div className='registration-page'>
       <div className='registration-header'>
         <Snackbars
           snackText={snackText}
@@ -59,36 +60,36 @@ const Registration = () => {
       </div>
       <div className='registration-block'>
         <img className='registration-block__logo' src={bodyLogo} alt='' />
-        <div className='registration-block__form'>
+        <div className='form-block'>
           <h1 className='form-block__main-name'>Регистрация</h1>
-          <div className='form-block__inputs'>
-            <div className='input-block__name'><p>Логин:</p></div>
+          <div className='inputs-block'>
+            <div className='inputs-block__name'><p>Логин:</p></div>
             <input
-              className='input-block__login'
+              className='inputs-block__login'
               name='login'
               type='text'
               placeholder='Логин'
               value={login}
               onChange={(e) => handleChange(e.target.value, 'login')}
             />
-            <div className='input-block__name'><p>Пароль:</p></div>
+            <div className='inputs-block__name'><p>Пароль:</p></div>
             <input
-              className='input-block__password'
+              className='inputs-block__password'
               type='password'
               placeholder='Пароль'
               value={password}
               onChange={(e) => handleChange(e.target.value, 'password')}
             />
-            <div className='input-block__name'><p>Повторите пароль:</p></div>
+            <div className='inputs-block__name'><p>Повторите пароль:</p></div>
             <input
-              className='input-block__password-repeat'
+              className='inputs-block__password-repeat'
               type='password'
               placeholder='Повторите пароль'
               value={passwordRepeat}
               onChange={(e) => handleChange(e.target.value, 'passwordRepeat')}
             />
           </div>
-          <div className='form-block__redirect'>
+          <div className='redirect-block'>
             <button
               className='redirect-block__registration'
               onClick={() => verifyValidationForm(user)}
