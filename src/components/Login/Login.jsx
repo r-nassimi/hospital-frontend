@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from 'src/index';
-import { validationString } from 'src/helper/helper-validate';
 import Snackbars from 'src/Snackbars/Snackbars';
+import { validationString } from 'src/helper/helper-validate';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
 import 'src/components/Login/style.scss';
@@ -20,7 +20,7 @@ const Login = () => {
   const openSnackbar = (text) => {
     setSnackOpen(true);
     setSnackText(text);
-  }
+  };
 
   const verifyValidationForm = async (user) => {
     if (!validationString(login)) {
@@ -41,10 +41,10 @@ const Login = () => {
   return (
     <div className='login-page'>
       <div className='login-header'>
-      <Snackbars
-        snackText={snackText}
-        snackOpen={snackOpen}
-        setSnackOpen={setSnackOpen} 
+        <Snackbars
+          snackText={snackText}
+          snackOpen={snackOpen}
+          setSnackOpen={setSnackOpen}
         />
         <img className='login-header__logo' src={headerLogo} alt='' />
         <div className='login-header__text'>

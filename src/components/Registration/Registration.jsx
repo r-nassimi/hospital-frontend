@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from 'src/index';
-import { validationString } from 'src/helper/helper-validate';
 import Snackbars from 'src/Snackbars/Snackbars';
+import { validationString } from 'src/helper/helper-validate';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
 import 'src/components/Registration/style.scss';
@@ -23,7 +23,7 @@ const Registration = () => {
   const openSnackbar = (message) => {
     setSnackOpen(true);
     setSnackText(message);
-  }
+  };
 
   const verifyValidationForm = async (user) => {
     if (!validationString(login)) {

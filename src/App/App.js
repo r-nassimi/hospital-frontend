@@ -9,6 +9,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
+        
         //Redirect from empty adress to login form
         <Route path="/" element={<Navigate replace to = "/login"/>} />
       </Routes>
