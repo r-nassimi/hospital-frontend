@@ -10,19 +10,19 @@ export default class Store {
 
   setUser(user) {
     this.user = user;
-  }
+  };
 
   setAuthorizated(boolean) {
     this.authorizated = boolean;
-  }
+  };
 
   setLoading(boolean) {
     this.loading = boolean;
-  }
+  };
 
   setErrors(error) {
     this.errors = error;
-  }
+  };
 
   async registration(login, password) {
     try {
@@ -33,13 +33,12 @@ export default class Store {
       localStorage.setItem("token", response.data.accessToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
-      this.setErrors(false);
     } catch (e) {
       this.setErrors(
-        `Пользователь с логином ${login} уже существует!`
+        `Произошла трагедия во время регистрации пользователя ${login}!`
       );
-    }
-  }
+    };
+  };
 
   async login(login, password) {
     try {
@@ -47,11 +46,12 @@ export default class Store {
       localStorage.setItem("token", response.data.accessToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
-      this.setErrors(false);
     } catch (e) {
-      this.setErrors("Данный пользователь не существует!");
-    }
-  }
+      this.setErrors(
+        `Произошла трагедия во время авторизации пользователя ${login}!`
+        );
+    };
+  };
 
   async logout() {
     try {
@@ -61,8 +61,8 @@ export default class Store {
       this.setUser({});
     } catch (e) {
       this.setErrors(e.response.data.message);
-    }
-  }
+    };
+  };
 
   async checkAuthorization() {
     this.setLoading(true);
@@ -77,19 +77,20 @@ export default class Store {
       this.setErrors(e);
     } finally {
       this.setLoading(false);
-    }
-  }
+    };
+  };
 
   async refresh() {
     try {
       const response = await axios.get(`${API_URL}/refresh`, {
         withCredentials: true,
       });
-      localStorage.setItem("token", response.data.accessToken);
+      this.setAuthorizated(true);
+      localStorage.setItem('token', response.data.accessToken);
     } catch (e) {
-      this.setErrors("Не авторизован!");
+      this.setErrors('Не авторизован!')
       localStorage.clear();
       this.setUser({});
-    }
-  }
-}
+    };
+  };
+};

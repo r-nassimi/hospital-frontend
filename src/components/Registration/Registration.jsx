@@ -5,7 +5,7 @@ import Snackbars from 'src/Snackbars/Snackbars';
 import { validationString } from 'src/helper/helper-validate';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
-import 'src/components/Registration/style.scss';
+import './style.scss';
 
 const Registration = () => {
   const [user, setUser] = useState({

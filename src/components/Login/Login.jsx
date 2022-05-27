@@ -5,7 +5,7 @@ import Snackbars from 'src/Snackbars/Snackbars';
 import { validationString } from 'src/helper/helper-validate';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
-import 'src/components/Login/style.scss';
+import './style.scss';
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -80,7 +80,8 @@ const Login = () => {
             >
               Войти
             </button>
-            <Link to='/registration'
+            <Link
+              to='/registration'
               className='redirect-block__registrate'
             >
               Зарегистрироваться
