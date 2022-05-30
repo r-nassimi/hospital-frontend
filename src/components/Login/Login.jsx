@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from 'src/index';
 import Snackbars from 'src/Snackbars/Snackbars';
-import { validationString } from 'src/helper/helper-validate';
+import { validationObject } from 'src/helper/helper-validate';
 import headerLogo from 'src/logos/mainLogo.svg';
 import bodyLogo from 'src/logos/buildings.svg';
 import './style.scss';
@@ -23,11 +23,11 @@ const Login = () => {
   };
 
   const verifyValidationForm = async (user) => {
-    if (!validationString(login)) {
+    if (!validationObject(login)) {
       openSnackbar('Логин некорректен!');
       return;
     }
-    if (!validationString(password)) {
+    if (!validationObject(password)) {
       openSnackbar('Пароль некорректен!');
       return;
     }

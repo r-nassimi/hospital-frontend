@@ -85,7 +85,6 @@ export default class Store {
       const response = await axios.get(`${API_URL}/refresh`, {
         withCredentials: true,
       });
-      this.setAuthorizated(true);
       localStorage.setItem('token', response.data.accessToken);
     } catch (e) {
       this.setErrors('Не авторизован!')

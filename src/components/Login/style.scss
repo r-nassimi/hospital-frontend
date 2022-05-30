@@ -13,7 +13,6 @@
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
 
     &__text {
-      display: flex;
       justify-content: center;
       width: 560px;
       height: 55px;
@@ -46,7 +45,6 @@
     margin-top: 200px;
 
     &__logo {
-      display: flex;
       align-items: center;
       justify-content: center;
       width: 380px;
@@ -57,7 +55,6 @@
     }
 
     .form-block {
-      display: flex;
       flex-direction: column;
       background-color: #FFFFFF;
       top: 160px;
@@ -67,7 +64,6 @@
       margin-left: 50px;
 
       &__main-name {
-        display: flex;
         width: 280px;
         height: 45px;
         top: 200px;
@@ -94,7 +90,6 @@
         }
 
         &__login {
-          display: flex;
           align-items: center;
           justify-content: center;
           margin-left: 20px;
@@ -109,7 +104,6 @@
         }
 
         &__password {
-          display: flex;
           align-items: center;
           justify-content: center;
           margin-left: 20px;
@@ -133,7 +127,6 @@
         margin-right: 50px;
 
         &__authorizate {
-          display: flex;
           margin-top: 10px;
           align-items: center;
           justify-content: center;
@@ -145,14 +138,10 @@
           font-size: 18px;
           width: 180px;
           height: 40px;
-
-          &:hover {
-            cursor: pointer;
-          }
+          cursor: pointer;
         }
 
         &__registrate {
-          display: flex;
           width: 135px;
           height: 20px;
           margin-top: 10px;
@@ -165,10 +154,7 @@
           font-size: 18px;
           font-weight: 300;
           line-height: 20px;
-
-          &:hover {
-            cursor: pointer;
-          }
+          cursor: pointer;
         }
       }
     }
