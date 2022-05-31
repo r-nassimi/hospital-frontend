@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Registration from "src/components/Registration/Registration";
 import Login from "src/components/Login/Login";
-import 'src/App/app.scss'
+import './app.scss'
 
 const App = () => {
   return (

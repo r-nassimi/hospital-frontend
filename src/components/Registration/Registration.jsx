@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Context } from 'src/index';
 import Snackbars from 'src/Snackbars/Snackbars';
 import { validationObject } from 'src/helper/helper-validate';
@@ -17,7 +17,6 @@ const Registration = () => {
   const [snackText, setSnackText] = useState('');
   const [snackOpen, setSnackOpen] = useState(false);
   const { store } = useContext(Context);
-  const navigate = useNavigate();
 
   const openSnackbar = (message) => {
     setSnackOpen(true);
@@ -41,7 +40,7 @@ const Registration = () => {
   };
 
   const handleChange = (value, type) => {
-    setUser({ ...login, password, passwordRepeat, [type]: value });
+    setUser({ ...user, [type]: value });
   };
 
   return (
@@ -66,7 +65,6 @@ const Registration = () => {
             <input
               className='inputs-block__login'
               name='login'
-              type='text'
               placeholder='Логин'
               value={login}
               onChange={(e) => handleChange(e.target.value, 'login')}

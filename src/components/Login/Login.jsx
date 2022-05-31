@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   const handleChange = (value, type) => {
-    setUser({ ...login, password, [type]: value });
+    setUser({ ...user, [type]: value });
   };
 
   return (
@@ -59,7 +59,6 @@ const Login = () => {
             <div className='inputs-block__name'><p>Логин:</p></div>
             <input
               className='inputs-block__login'
-              type='text'
               placeholder='Логин'
               value={login}
               onChange={(e) => handleChange(e.target.value, 'login')}
