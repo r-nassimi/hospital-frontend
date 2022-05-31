@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from 'src/index';
 import Snackbars from 'src/Snackbars/Snackbars';
 import { validationObject } from 'src/helper/helper-validate';
@@ -17,13 +17,14 @@ const Registration = () => {
   const [snackText, setSnackText] = useState('');
   const [snackOpen, setSnackOpen] = useState(false);
   const { store } = useContext(Context);
+  const navigate = useNavigate();
 
   const openSnackbar = (message) => {
     setSnackOpen(true);
     setSnackText(message);
   };
 
-  const verifyValidationForm = async (user) => {
+  const verifyValidationForm = async (login, password, passwordRepeat) => {
     if (!validationObject(login)) {
       openSnackbar('Логин должен содержать не менее 6 символов!');
       return;
@@ -40,7 +41,7 @@ const Registration = () => {
   };
 
   const handleChange = (value, type) => {
-    setUser({ ...user, [type]: value });
+    setUser({ ...login, password, passwordRepeat, [type]: value });
   };
 
   return (
@@ -90,7 +91,7 @@ const Registration = () => {
           <div className='redirect-block'>
             <button
               className='redirect-block__registration'
-              onClick={() => verifyValidationForm(user)}
+              onClick={() => verifyValidationForm(login, password, passwordRepeat)}
             >
               Зарегистрироваться
             </button>

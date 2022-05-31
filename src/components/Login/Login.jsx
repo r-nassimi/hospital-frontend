@@ -22,7 +22,7 @@ const Login = () => {
     setSnackText(text);
   };
 
-  const verifyValidationForm = async (user) => {
+  const verifyValidationForm = async (login, password) => {
     if (!validationObject(login)) {
       openSnackbar('Логин некорректен!');
       return;
@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   const handleChange = (value, type) => {
-    setUser({ ...user, [type]: value });
+    setUser({ ...login, password, [type]: value });
   };
 
   return (

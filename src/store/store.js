@@ -5,6 +5,7 @@ import { API_URL } from "src/constants";
 export default class Store {
   user = {};
   authorizated = false;
+  registrated = false;
   loading = false;
   errors = "";
 
@@ -15,6 +16,10 @@ export default class Store {
   setAuthorizated(boolean) {
     this.authorizated = boolean;
   };
+
+  setRegistrated(boolean) {
+    this.registrated = boolean;
+  }
 
   setLoading(boolean) {
     this.loading = boolean;

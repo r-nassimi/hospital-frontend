@@ -7,9 +7,9 @@ const Snackbars = ({ snackText, snackOpen, setSnackOpen }) => {
   return (
     <div>
       <Snackbar
-        open={ snackOpen }
-        onClose={ handleClose }
-        message={ snackText }
+        open={snackOpen}
+        onClose={handleClose}
+        message={snackText}
       />
     </div>
   );
