@@ -74,7 +74,7 @@ export default class Store {
       this.setAuthorizated(true);
       this.setUser(response.data.user);
     } catch (e) {
-      this.setErrors(e);
+      this.setErrors(e.response.data.message);
     } finally {
       this.setLoading(false);
     };
