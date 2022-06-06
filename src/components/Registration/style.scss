@@ -41,33 +41,27 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 200px;
+    margin: 330px;
     margin-top: 200px;
 
     &__icon {
       align-items: center;
       justify-content: center;
-      width: 380px;
-      height: 380px;
+      width: 370px;
+      height: 370px;
       margin-left: 100px;
-      top: 65px;
-      left: 38px;
     }
 
     &__form {
       flex-direction: column;
       background-color: #FFFFFF;
-      top: 160px;
-      left: 540px;
       width: 400px;
       height: 480px;
-      margin-left: 50px;
+      margin-left: 80px;
 
       &__title {
         width: 280px;
         height: 45px;
-        top: 200px;
-        left: 600px;
         font-size: 36px;
         font-weight: 300;
         line-height: 40px;
@@ -88,8 +82,6 @@
         margin-left: 20px;
         width: 320px;
         height: 40px;
-        left: 575px;
-        top: 310px;
         background: #FFFFFF;
         border: 1px solid rgba(0, 0, 0, 0.2);
         box-sizing: border-box;

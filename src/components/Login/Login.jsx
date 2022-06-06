@@ -22,7 +22,7 @@ const Login = () => {
     setSnackText(text);
   };
 
-  const compare = async (login, password) => {
+  const checker = async (login, password) => {
     try {
       if (!validationObject(login)) {
         openSnackbar('Логин некорректен!');
@@ -77,8 +77,8 @@ const Login = () => {
           />
           <button
             className='login__wrapper__form__authorization'
-            type='submit'
-            onClick={() => compare(login, password)}
+            type='button'
+            onClick={() => checker(login, password)}
           >
             Войти
           </button>

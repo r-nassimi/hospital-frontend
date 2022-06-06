@@ -23,7 +23,7 @@ const Registration = () => {
     setSnackText(message);
   };
 
-  const compare = async (login, password, passwordRepeat) => {
+  const checker = async (login, password, passwordRepeat) => {
     try {
       if (!validationObject(login)) {
         openSnackbar('Логин должен содержать не менее 6 символов!');
@@ -91,8 +91,8 @@ const Registration = () => {
           />
           <button
             className='registration__wrapper__form__registrate'
-            type='submit'
-            onClick={() => compare(login, password, passwordRepeat)}
+            type='button'
+            onClick={() => checker(login, password, passwordRepeat)}
           >
             Зарегистрироваться
           </button>
