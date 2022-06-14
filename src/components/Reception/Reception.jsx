@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { Context } from 'src/index';
 import { Link } from 'react-router-dom';
-import Inputs from '../Reception components/Inputs/Inputs';
+import Append from '../Reception components/Append/Append';
 import List from '../Reception components/List/List';
 import ReceptionService from 'src/services/ReceptionService';
 import headerLogo from 'src/logos/mainLogo.svg'
-import 'src/components/Reception/Reception';
+import 'src/components/Reception/style.scss';
 
 const Reception = () => {
   const [reception, setReception] = useState({
@@ -24,9 +24,9 @@ const Reception = () => {
 
   const getAll = async () => {
     const response = await ReceptionService.getList();
-    setList(response.data.data)
+    setList(response.data)
   };
-  
+
   //other component
   // const sortReception = [...list].sort((a,b) => {
   //   if(!sortField) {
@@ -44,34 +44,36 @@ const Reception = () => {
   // })
 
   const handleChange = (value, type) => {
-    setReception({...reception, [type]: value})
+    setReception({ ...reception, [type]: value })
   }
 
   return (
-    <div className='reception-page'>
-      <div className='reception-header'>
-        <img className='reception-header__logo' src={headerLogo} alt='' />
-        <div className='reception-header__text'><p>Приемы</p></div>
-        <div className='reception-header__logout-button'>
-          <button
-            className='logout-button'
-            onClick={() => store.logout()}
-          >
-            <Link to='/login'>Выход</Link>
-          </button>
-        </div>
+    <div className='reception'>
+      <div className='reception__header'>
+        <img className='reception__header__logo' src={headerLogo} alt='' />
+        <div className='reception__header__title'>Приемы</div>
+        <button
+          className='reception__header__logout'
+          onClick={() => store.logout()}
+        >
+          <Link to='/login'>Выход</Link>
+        </button>
       </div>
-      <div ></div>
-      <Inputs
-        list={list}
-        setList={setList}
-        reception={reception}
-        setReception={setReception}
-      />
-      <List
-        list={list}
-        setList={setList}
-      />
+      <div className='reception__append'>
+        <Append
+          list={list}
+          setList={setList}
+          reception={reception}
+          setReception={setReception}
+        />
+      </div>
+      <div className='reception__table'>
+        <List
+          list={list}
+          setList={setList}
+        />
+      </div>
+
     </div>
   );
 };

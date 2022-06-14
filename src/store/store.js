@@ -88,8 +88,6 @@ export default class Store {
   async getList() {
     try {
       const response = await ReceptionService.getList();
-      localStorage.getItem("accessToken", response.data.accessToken);
-      localStorage.getItem("refreshToken", response.data.refreshToken);
       this.setReception(response.data);
       return response;
     } catch (e) {
@@ -105,8 +103,6 @@ export default class Store {
         date,
         complaint
       );
-      localStorage.getItem("accessToken", response.data.accessToken);
-      localStorage.getItem("refreshToken", response.data.refreshToken);
       this.setUser(response.data);
       return response;
     } catch (e) {
@@ -123,8 +119,6 @@ export default class Store {
         date,
         complaint
       );
-      localStorage.getItem("accessToken", response.data.accessToken);
-      localStorage.getItem("refreshToken", response.data.refreshToken);
       this.setUser(response.data);
       return response;
     } catch (e) {
@@ -135,8 +129,6 @@ export default class Store {
   async deleteList(id) {
     try {
       const response = await ReceptionService.deleteList(id);
-      localStorage.getItem("accessToken", response.data.accessToken);
-      localStorage.getItem("refreshToken", response.data.refreshToken);
       this.setUser(response.data);
     } catch (e) {
       this.setErrors("Не удалось удалить данные!");

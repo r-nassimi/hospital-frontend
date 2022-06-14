@@ -8,7 +8,7 @@ import 'src/App/app.scss'
 
 const App = () => {
   const {store} = useContext(Context);
-  
+
   useEffect(() => {
       store.checkAuthorization()
   }, [store])
@@ -27,4 +27,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; 
