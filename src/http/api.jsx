@@ -15,7 +15,7 @@ api.interceptors.response.use((config) => {
   const originalRequest = error.config;
   if (error.response.status === 401 && originalRequest && !originalRequest._isRetry) {
     originalRequest._isRetry = true;
-    await api.get(`/refresh`)
+    await api.get(`/refresh`);
     return api.request(originalRequest);
   } else {
     throw error;

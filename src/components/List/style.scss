@@ -1,0 +1,26 @@
+.list {
+  &__table {
+    &__data {
+      background-color: #fff;
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+      text-align: center;
+      min-height: 80px;
+      padding: 20px;
+      max-width: 500px;
+      word-wrap: break-word;
+      word-break: normal;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+  tr {
+    td {
+      padding: 20px 30px 15px 30px;
+    }
+  }
+}

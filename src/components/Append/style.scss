@@ -1,0 +1,15 @@
+.append{
+  display: flex;
+  flex-direction: row;
+  &__block{
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+  }
+  &__create{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 35px;
+  }
+}

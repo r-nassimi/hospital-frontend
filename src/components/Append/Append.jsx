@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Context } from "src/index";
 import { DoctorsList } from "src/constants";
-import 'src/components/Reception components/Append/style.scss'
+import 'src/components/Append/style.scss'
 
 const Append = ({ setList, reception, setReception }) => {
   const { name, doctor, date, complaint } = reception;
@@ -10,9 +10,7 @@ const Append = ({ setList, reception, setReception }) => {
   const createList = async (e) => {
     e.preventDefault();
     const response = await store.createList(name, doctor, date, complaint);
-    if (response.data) {
-      setList(response.data);
-    }
+    setList(response.data);
     setReception({
       name: '',
       doctor: '',
@@ -21,8 +19,8 @@ const Append = ({ setList, reception, setReception }) => {
     });
   };
 
-  const handleChange = (value, type) => {
-    setReception({ ...reception, [type]: value })
+  const handleChange = (value, key) => {
+    setReception({ ...reception, [key]: value })
   }
 
   return (
