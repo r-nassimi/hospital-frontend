@@ -1,10 +1,10 @@
-import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from 'src/index';
 import Snackbars from 'src/Snackbars/Snackbars';
 import { validationObject } from 'src/helper/helper-validate';
-import headerLogo from 'src/logos/mainLogo.svg';
-import bodyLogo from 'src/logos/buildings.svg';
+import logo from 'src/logos/mainLogo.svg';
+import icon from 'src/logos/buildings.svg';
 import './style.scss';
 
 const Login = () => {
@@ -13,6 +13,7 @@ const Login = () => {
     password: '',
   });
   const { login, password } = user;
+  const navigate = useNavigate();
   const [snackText, setSnackText] = useState('');
   const [snackOpen, setSnackOpen] = useState(false);
   const { store } = useContext(Context);
@@ -21,17 +22,22 @@ const Login = () => {
     setSnackOpen(true);
     setSnackText(text);
   };
-
-  const verifyValidationForm = async (user) => {
-    if (!validationObject(login)) {
-      openSnackbar('Логин некорректен!');
-      return;
-    }
-    if (!validationObject(password)) {
-      openSnackbar('Пароль некорректен!');
-      return;
-    }
-    await store.login(login, password);
+  
+  const checker = async (login, password) => {
+    try {
+      if (!validationObject(login)) {
+        openSnackbar('Логин некорректен!');
+        return;
+      }
+      if (!validationObject(password)) {
+        openSnackbar('Пароль некорректен!');
+        return;
+      }
+      await store.login(login, password);
+      navigate('/reception');  
+    } catch (e) {
+      openSnackbar(`Произошла ошибка во время авторизации пользователя`);
+    }; 
   };
 
   const handleChange = (value, type) => {
@@ -39,54 +45,51 @@ const Login = () => {
   };
 
   return (
-    <div className='login-page'>
-      <div className='login-header'>
+    <div className='login'>
+      <div className='login__header'>
         <Snackbars
           snackText={snackText}
           snackOpen={snackOpen}
           setSnackOpen={setSnackOpen}
         />
-        <img className='login-header__logo' src={headerLogo} alt='' />
-        <div className='login-header__text'>
-          <p>Войти в систему</p>
+        <img className='login__header__logo' src={logo} alt='' />
+        <div className='login__header__title'>
+          Войти в систему
         </div>
       </div>
-      <div className='login-block'>
-        <img className='login-block__logo' src={bodyLogo} alt='' />
-        <div className='form-block'>
-          <h1 className='form-block__main-name'>Войти в систему</h1>
-          <div className='inputs-block'>
-            <div className='inputs-block__name'><p>Логин:</p></div>
-            <input
-              className='inputs-block__login'
-              type='text'
-              placeholder='Логин'
-              value={login}
-              onChange={(e) => handleChange(e.target.value, 'login')}
-            />
-            <div className='inputs-block__name'><p>Пароль:</p></div>
-            <input
-              className='inputs-block__password'
-              type='password'
-              placeholder='Пароль'
-              value={password}
-              onChange={(e) => handleChange(e.target.value, 'password')}
-            />
-          </div>
-          <div className='redirect-block'>
-            <button
-              className='redirect-block__authorizate'
-              onClick={() => verifyValidationForm(login, password)}
-            >
-              Войти
-            </button>
-            <Link
-              to='/registration'
-              className='redirect-block__registrate'
-            >
-              Зарегистрироваться
-            </Link>
-          </div>
+      <div className='login__wrapper'>
+        <img className='login__wrapper__icon' src={icon} alt='' />
+        <div className='login__wrapper__form'>
+          <h1 className='login__wrapper__form__title'>Войти в систему</h1>
+          <div className='login__wrapper__form__label'><p>Логин:</p></div>
+          <input
+            className='login__wrapper__form__field'
+            type='text'
+            placeholder='Логин'
+            value={login}
+            onChange={(e) => handleChange(e.target.value, 'login')}
+          />
+          <div className='login__wrapper__form__label'><p>Пароль:</p></div>
+          <input
+            className='login__wrapper__form__field'
+            type='password'
+            placeholder='Пароль'
+            value={password}
+            onChange={(e) => handleChange(e.target.value, 'password')}
+          />
+          <button
+            className='login__wrapper__form__authorization'
+            type='button'
+            onClick={() => checker(login, password)}
+          >
+            Войти
+          </button>
+          <Link
+            to='/registration'
+            className='login__wrapper__form__registration'
+          >
+            Зарегистрироваться
+          </Link>
         </div>
       </div>
     </div>

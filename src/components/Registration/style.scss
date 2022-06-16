@@ -1,28 +1,28 @@
-.registration-page {
+.registration {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
-  .registration-header {
-    display: flex;
+  &__header {
     flex-direction: row;
     align-items: center;
     justify-content: center;
     position: absolute;
     height: 120px;
-    width: -webkit-fill-available;
+    width: 100%;
     left: 0px;
     top: 0px;
-    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 4px 4px rgba(20, 20, 20, 0.2);
 
-    &__text {
+    &__title {
       justify-content: center;
-      width: 560px;
-      height: 55px;
-      left: 210px;
-      top: 40px;
-      font-family: 'Roboto', sans-serif;
+      width: 600px;
+      height: 5px;
       font-size: 36px;
       font-weight: 300;
       line-height: 42px;
-      margin-bottom: 50px;
+      margin-left: 300px;
+      margin-top: 40px;
     }
 
     &__logo {
@@ -36,7 +36,7 @@
     }
   }
 
-  .registration-block {
+  &__wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -44,7 +44,7 @@
     margin: 200px;
     margin-top: 200px;
 
-    &__logo {
+    &__icon {
       align-items: center;
       justify-content: center;
       width: 380px;
@@ -54,7 +54,7 @@
       left: 38px;
     }
 
-    .form-block {
+    &__form {
       flex-direction: column;
       background-color: #FFFFFF;
       top: 160px;
@@ -63,113 +63,66 @@
       height: 480px;
       margin-left: 50px;
 
-      &__main-name {
+      &__title {
         width: 280px;
         height: 45px;
         top: 200px;
         left: 600px;
-        font-family: 'Roboto', sans-serif;
         font-size: 36px;
         font-weight: 300;
         line-height: 40px;
-        margin-left: 50px;
+        margin-left: 70px;
       }
 
-      .inputs-block {
-        display: flex;
-        flex-direction: column;
+      &__label {
+        margin-left: 20px;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 21px;
+        margin-top: -5px;
+      }
+
+      &__field {
+        align-items: center;
         justify-content: center;
-        margin-top: -10px;
-
-        &__name {
-          margin-left: 20px;
-          font-family: 'Roboto', sans-serif;
-          font-size: 18px;
-          font-weight: 300;
-          line-height: 21px;
-        }
-
-        &__login {
-          align-items: center;
-          justify-content: center;
-          margin-left: 20px;
-          width: 320px;
-          height: 40px;
-          left: 575px;
-          top: 310px;
-          background: #FFFFFF;
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          box-sizing: border-box;
-          border-radius: 4px;
-        }
-
-        &__password {
-          align-items: center;
-          justify-content: center;
-          margin-left: 20px;
-          width: 320px;
-          height: 40px;
-          left: 575px;
-          top: 310px;
-          background: #FFFFFF;
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          box-sizing: border-box;
-          border-radius: 4px;
-        }
-
-        &__password-repeat {
-          align-items: center;
-          justify-content: center;
-          margin-left: 20px;
-          width: 320px;
-          height: 40px;
-          left: 575px;
-          top: 310px;
-          background: #FFFFFF;
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          box-sizing: border-box;
-          border-radius: 4px;
-        }
+        margin-left: 20px;
+        width: 320px;
+        height: 40px;
+        left: 575px;
+        top: 310px;
+        background: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        border-radius: 4px;
       }
 
-      .redirect-block {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        justify-content: flex-end;
-        margin-right: 50px;
+      &__registrate {
+        margin-left: 170px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        background-color: white;
+        box-sizing: border-box;
+        border-radius: 4px;
+        font-size: 18px;
+        width: 185px;
+        height: 40px;
+        cursor: pointer;
+      }
 
-        &__registration {
-          margin-top: 10px;
-          margin-left: 150px;
-          align-items: center;
-          justify-content: center;
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          background-color: white;
-          box-sizing: border-box;
-          border-radius: 4px;
-          font-family: 'Roboto', sans-serif;
-          font-size: 18px;
-          width: 200px;
-          height: 40px;
-          cursor: pointer;
-        }
-
-        &__authorization {
-          width: 135px;
-          height: 20px;
-          margin-top: 5px;
-          margin-left: 150px;
-          border: none;
-          background-color: white;
-          align-items: center;
-          justify-content: center;
-          font-family: 'Roboto', sans-serif;
-          font-size: 18px;
-          font-weight: 300;
-          line-height: 20px;
-          cursor: pointer;
-        }
+      &__authorizate {
+        margin: 220px;
+        width: 135px;
+        height: 20px;
+        border: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 20px;
+        cursor: pointer;
       }
     }
   }

@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from 'src/index';
 import Snackbars from 'src/Snackbars/Snackbars';
 import { validationObject } from 'src/helper/helper-validate';
-import headerLogo from 'src/logos/mainLogo.svg';
-import bodyLogo from 'src/logos/buildings.svg';
+import logo from 'src/logos/mainLogo.svg';
+import icon from 'src/logos/buildings.svg';
 import './style.scss';
 
 const Registration = () => {
@@ -14,6 +14,7 @@ const Registration = () => {
     passwordRepeat: ''
   });
   const { login, password, passwordRepeat } = user;
+  const navigate = useNavigate();
   const [snackText, setSnackText] = useState('');
   const [snackOpen, setSnackOpen] = useState(false);
   const { store } = useContext(Context);
@@ -23,20 +24,25 @@ const Registration = () => {
     setSnackText(message);
   };
 
-  const verifyValidationForm = async (user) => {
-    if (!validationObject(login)) {
-      openSnackbar('Логин должен содержать не менее 6 символов!');
-      return;
+  const checker = async (login, password, passwordRepeat) => {
+    try {
+      if (!validationObject(login)) {
+        openSnackbar('Логин должен содержать не менее 6 символов!');
+        return;
+      }
+      if (!validationObject(password)) {
+        openSnackbar('Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!');
+        return;
+      }
+      if (passwordRepeat !== password) {
+        openSnackbar('Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!');
+        return;
+      }
+      await store.registration(login, password);
+      navigate('/reception')
+    } catch (e) {
+      openSnackbar(`Произошла ошибка во время регистрации пользователя`)
     }
-    if (!validationObject(password)) {
-      openSnackbar('Длина пароля должна быть не менее 6 символов, обязательно содежать латинские буквы и содержать хотя-бы одну цифру!');
-      return;
-    }
-    if (passwordRepeat !== password) {
-      openSnackbar('Пароль или его повтор неверен! Пожалуйста, проверьте свои введенные данные!');
-      return;
-    }
-    await store.registration(login, password);
   };
 
   const handleChange = (value, type) => {
@@ -44,62 +50,59 @@ const Registration = () => {
   };
 
   return (
-    <div className='registration-page'>
-      <div className='registration-header'>
+    <div className='registration'>
+      <div className='registration__header'>
         <Snackbars
           snackText={snackText}
           snackOpen={snackOpen}
           setSnackOpen={setSnackOpen}
         />
-        <img className='registration-header__logo' src={headerLogo} alt='' />
-        <div className='registration-header__text'>
+        <img className='registration__header__logo' src={logo} alt='' />
+        <div className='registration__header__title'>
           <p>Зарегистрироваться в системе</p>
         </div>
       </div>
-      <div className='registration-block'>
-        <img className='registration-block__logo' src={bodyLogo} alt='' />
-        <div className='form-block'>
-          <h1 className='form-block__main-name'>Регистрация</h1>
-          <div className='inputs-block'>
-            <div className='inputs-block__name'><p>Логин:</p></div>
-            <input
-              className='inputs-block__login'
-              name='login'
-              type='text'
-              placeholder='Логин'
-              value={login}
-              onChange={(e) => handleChange(e.target.value, 'login')}
-            />
-            <div className='inputs-block__name'><p>Пароль:</p></div>
-            <input
-              className='inputs-block__password'
-              type='password'
-              placeholder='Пароль'
-              value={password}
-              onChange={(e) => handleChange(e.target.value, 'password')}
-            />
-            <div className='inputs-block__name'><p>Повторите пароль:</p></div>
-            <input
-              className='inputs-block__password-repeat'
-              type='password'
-              placeholder='Повторите пароль'
-              value={passwordRepeat}
-              onChange={(e) => handleChange(e.target.value, 'passwordRepeat')}
-            />
-          </div>
-          <div className='redirect-block'>
+      <div className='registration__wrapper'>
+        <img className='registration__wrapper__icon' src={icon} alt='' />
+        <div className='registration__wrapper__form'>
+          <h1 className='registration__wrapper__form__title'>Регистрация</h1>
+          <div className='registration__wrapper__form__label'><p>Логин:</p></div>
+          <input
+            className='registration__wrapper__form__field'
+            name='login'
+            type='text'
+            placeholder='Логин'
+            value={login}
+            onChange={(e) => handleChange(e.target.value, 'login')}
+          />
+          <div className='registration__wrapper__form__label'><p>Пароль:</p></div>
+          <input
+            className='registration__wrapper__form__field'
+            type='password'
+            placeholder='Пароль'
+            value={password}
+            onChange={(e) => handleChange(e.target.value, 'password')}
+          />
+          <div className='registration__wrapper__form__label'><p>Повторите пароль:</p></div>
+          <input
+            className='registration__wrapper__form__field'
+            type='password'
+            placeholder='Повторите пароль'
+            value={passwordRepeat}
+            onChange={(e) => handleChange(e.target.value, 'passwordRepeat')}
+          />
             <button
-              className='redirect-block__registration'
-              onClick={() => verifyValidationForm(user)}
+              className='registration__wrapper__form__registrate'
+              type='button'
+              onClick={() => checker(login, password, passwordRepeat)}
             >
               Зарегистрироваться
             </button>
-            <Link to='/login'
-              className='redirect-block__authorization'
-            >
-              Авторизоваться
-            </Link>
-          </div>
+          <Link to='/login'
+            className='registration__wrapper__form__authorizate'
+          >
+            Авторизоваться
+          </Link>
         </div>
       </div>
     </div>

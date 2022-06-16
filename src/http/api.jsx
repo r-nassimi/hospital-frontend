@@ -1,14 +1,12 @@
 import axios from 'axios';
-import Store from 'src/store/store';
 import { API_URL } from "src/constants";
 
 const api = axios.create({
   baseURL: API_URL,
-});
-
-api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-  return config;
+  headers:{
+    accessToken: localStorage.getItem('accessToken'),
+    refreshToken: localStorage.getItem('refreshToken')
+  }
 });
 
 api.interceptors.response.use((config) => {
@@ -17,11 +15,11 @@ api.interceptors.response.use((config) => {
   const originalRequest = error.config;
   if (error.response.status === 401 && originalRequest && !originalRequest._isRetry) {
     originalRequest._isRetry = true;
-    await Store.refresh();
+    await api.get(`/refresh`);
     return api.request(originalRequest);
   } else {
     throw error;
   };
 });
 
-export default api; 
+export default api;  
