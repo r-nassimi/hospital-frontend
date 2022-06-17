@@ -15,13 +15,13 @@ const List = ({ list }) => {
           }
           {
             list.map(({ _id, name, doctor, date, complaint }, index) =>
-            <tr className='list__table__line' key={`list-${_id}`}>
+              <tr className='list__table__line' key={`list-${_id}`}>
                 <td className='list__table__line__data'>{name}</td>
                 <td className='list__table__line__data'>{doctor}</td>
                 <td className='list__table__line__data'>{date}</td>
                 <td className='list__table__line__data'>{complaint}</td>
                 <td className='list__table__line__data'>
-                <button type='button' className='list__table__button'><img src={deleteLogo} alt=''></img></button>
+                  <button type='button' className='list__table__button'><img src={deleteLogo} alt=''></img></button>
                   <button type='button' className='list__table__button'><img src={editLogo} alt=''></img></button>
                 </td>
               </tr>

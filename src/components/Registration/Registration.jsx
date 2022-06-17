@@ -91,13 +91,13 @@ const Registration = () => {
             value={passwordRepeat}
             onChange={(e) => handleChange(e.target.value, 'passwordRepeat')}
           />
-            <button
-              className='registration__wrapper__form__registrate'
-              type='button'
-              onClick={() => checker(login, password, passwordRepeat)}
-            >
-              Зарегистрироваться
-            </button>
+          <button
+            className='registration__wrapper__form__registrate'
+            type='button'
+            onClick={() => checker(login, password, passwordRepeat)}
+          >
+            Зарегистрироваться
+          </button>
           <Link to='/login'
             className='registration__wrapper__form__authorizate'
           >

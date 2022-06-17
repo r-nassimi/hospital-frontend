@@ -29,7 +29,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
       <div className='creator__block'>
         <label for='name'>
           Имя
-          </label>
+        </label>
         <input
           className='creator__block__input'
           type='text'
@@ -41,10 +41,10 @@ const Creator = ({ list, setList, reception, setReception }) => {
       <div className='creator__block'>
         <label for='doctor'>
           Доктор
-          </label>
+        </label>
         <select
           className='creator__block__input'
-          type='text' 
+          type='text'
           value={doctor}
           id='doctor'
           onChange={(e) => handleChange(e.target.value, 'doctor')}
@@ -54,15 +54,15 @@ const Creator = ({ list, setList, reception, setReception }) => {
             doctorsList.map((doctor, index) =>
               <option value={doctor}>
                 {doctor}
-                </option>
-                )
+              </option>
+            )
           }
         </select>
       </div>
       <div className='creator__block'>
         <label for='date'>
           Дата
-          </label>
+        </label>
         <input
           className='creator__block__input'
           type='date'
@@ -74,7 +74,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
       <div className='creator__block'>
         <label for='complaint'>
           Жалоба
-          </label>
+        </label>
         <input
           className='creator__block__input'
           type='text'
@@ -84,12 +84,12 @@ const Creator = ({ list, setList, reception, setReception }) => {
         />
       </div>
       <div className='creator__block'>
-        <button 
-        className='creator__block__add' 
-        type='submit' 
-        onClick={createAppoint}>
+        <button
+          className='creator__block__add'
+          type='submit'
+          onClick={createAppoint}>
           Добавить
-          </button>
+        </button>
       </div>
     </div>
   )

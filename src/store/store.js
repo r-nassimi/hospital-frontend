@@ -35,7 +35,6 @@ export default class Store {
         password
       );
       localStorage.setItem("accessToken", response.data.accesstoken);
-      localStorage.setItem("refreshToken",response.data.refreshtoken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
       return true
@@ -50,7 +49,6 @@ export default class Store {
     try {
       const response = await AuthService.login(login, password);
       localStorage.setItem("accessToken", response.data.accessToken);
-      localStorage.setItem("refreshToken",response.data.refreshToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
       return true
@@ -65,7 +63,6 @@ export default class Store {
     try {
       const response = await AuthService.logout();
       localStorage.removeItem("accessToken", response.data.accessToken);
-      localStorage.removeItem("refreshToken",response.data.refreshToken);
       this.setAuthorizated(false);
       this.setUser({});
     } catch (e) {
@@ -78,7 +75,6 @@ export default class Store {
     try {
       const response = await AuthService.refresh();
       localStorage.setItem("accessToken", response.data.accessToken);
-      localStorage.setItem("refreshToken",response.data.refreshToken);
       this.setAuthorizated(true);
       this.setUser(response.data.user);
     } catch (e) {
@@ -130,6 +126,7 @@ export default class Store {
   async deleteList(id) {
     try {
       const response = await ReceptionService.deleteList(id);
+      return response;
     } catch (e) {
       this.setErrors("Не удалось удалить данные!");
     }

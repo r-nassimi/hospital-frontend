@@ -3,11 +3,12 @@ import { API_URL } from "src/constants";
 
 const api = axios.create({
   baseURL: API_URL,
-  headers:{
-    accessToken: localStorage.getItem('accessToken'),
-    refreshToken: localStorage.getItem('refreshToken')
-  }
 });
+
+api.interceptors.request.use((config) => {
+  config.headers.accessToken = `${localStorage.getItem('accessToken')}`;
+  return config;
+})
 
 api.interceptors.response.use((config) => {
   return config;

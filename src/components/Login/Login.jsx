@@ -22,7 +22,7 @@ const Login = () => {
     setSnackOpen(true);
     setSnackText(text);
   };
-  
+
   const checker = async (login, password) => {
     try {
       if (!validationObject(login)) {
@@ -34,10 +34,10 @@ const Login = () => {
         return;
       }
       await store.login(login, password);
-      navigate('/reception');  
+      navigate('/reception');
     } catch (e) {
       openSnackbar(`Произошла ошибка во время авторизации пользователя`);
-    }; 
+    };
   };
 
   const handleChange = (value, type) => {

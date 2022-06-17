@@ -24,14 +24,14 @@ const Reception = () => {
 
   const getAll = async () => {
     const response = await store.getList();
-    if(response.data) setList(response.data);
+    if (response.data) setList(response.data);
 
     return;
   };
 
   const logout = async () => {
     await store.logout();
-    navigate('/login')    
+    navigate('/login')
     return;
   }
 
