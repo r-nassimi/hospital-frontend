@@ -4,14 +4,14 @@ import { Context } from "src/index";
 import Registration from "src/components/Registration/Registration";
 import Login from "src/components/Login/Login";
 import Reception from "src/components/Reception/Reception";
-import 'src/App/app.scss'
+import "src/App/app.scss";
 
 const App = () => {
   const { store } = useContext(Context);
 
   useEffect(() => {
     store.checkAuthorization();
-  }, [store])
+  }, []);
 
   return (
     <div className="App">
@@ -27,4 +27,4 @@ const App = () => {
   );
 };
 
-export default App;  
+export default App;

@@ -23,7 +23,7 @@ const Login = () => {
     setSnackText(text);
   };
 
-  const checker = async (login, password) => {
+  const checker = async () => {
     try {
       if (!validationObject(login)) {
         openSnackbar('Логин некорректен!');
@@ -52,16 +52,24 @@ const Login = () => {
           snackOpen={snackOpen}
           setSnackOpen={setSnackOpen}
         />
-        <img className='login__header__logo' src={logo} alt='' />
+        <img
+          className='login__header__logo'
+          src={logo} alt=''
+        />
         <div className='login__header__title'>
           Войти в систему
         </div>
       </div>
       <div className='login__wrapper'>
-        <img className='login__wrapper__icon' src={icon} alt='' />
+        <img
+          className='login__wrapper__icon'
+          src={icon} alt=''
+        />
         <div className='login__wrapper__form'>
           <h1 className='login__wrapper__form__title'>Войти в систему</h1>
-          <div className='login__wrapper__form__label'><p>Логин:</p></div>
+          <div className='login__wrapper__form__label'>
+            <p>Логин:</p>
+          </div>
           <input
             className='login__wrapper__form__field'
             type='text'
@@ -69,7 +77,9 @@ const Login = () => {
             value={login}
             onChange={(e) => handleChange(e.target.value, 'login')}
           />
-          <div className='login__wrapper__form__label'><p>Пароль:</p></div>
+          <div className='login__wrapper__form__label'>
+            <p>Пароль:</p>
+          </div>
           <input
             className='login__wrapper__form__field'
             type='password'
@@ -80,7 +90,7 @@ const Login = () => {
           <button
             className='login__wrapper__form__authorization'
             type='button'
-            onClick={() => checker(login, password)}
+            onClick={checker}
           >
             Войти
           </button>

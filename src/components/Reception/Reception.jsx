@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Context } from 'src/index';
 import Creator from 'src/components/Creator/Creator';
 import List from 'src/components/List/List';
-import headerLogo from 'src/logos/mainLogo.svg'
+import headerLogo from 'src/logos/mainLogo.svg';
 import './style.scss';
 
 const Reception = () => {
@@ -18,22 +18,19 @@ const Reception = () => {
   const { store } = useContext(Context);
 
   useEffect(() => {
-    console.log(localStorage.getItem('accessToken'), 11);
     getAll();
   }, []);
 
   const getAll = async () => {
     const response = await store.getList();
-    if (response.data) setList(response.data);
-
-    return;
+    setList(response.data);
   };
 
   const logout = async () => {
     await store.logout();
-    navigate('/login')
+    navigate('/login');
     return;
-  }
+  };
 
   return (
     <div className='reception'>

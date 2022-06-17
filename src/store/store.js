@@ -3,25 +3,10 @@ import ReceptionService from "src/services/ReceptionService";
 
 export default class Store {
   user = {};
-  authorizated = false;
-  loading = false;
-  reception = [];
   errors = "";
 
   setUser(user) {
     this.user = user;
-  }
-
-  setAuthorizated(boolean) {
-    this.authorizated = boolean;
-  }
-
-  setLoading(boolean) {
-    this.loading = boolean;
-  }
-
-  setReception(reception) {
-    this.reception = reception;
   }
 
   setErrors(error) {
@@ -34,10 +19,15 @@ export default class Store {
         login,
         password
       );
-      localStorage.setItem("accessToken", response.data.accesstoken);
-      this.setAuthorizated(true);
+      localStorage.setItem(
+        "accessToken", 
+        response.data.accessToken
+        );
+      localStorage.setItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
       this.setUser(response.data.user);
-      return true
     } catch (e) {
       this.setErrors(
         `Произошла трагедия во время регистрации пользователя ${login}!`
@@ -48,10 +38,15 @@ export default class Store {
   async login(login, password) {
     try {
       const response = await AuthService.login(login, password);
-      localStorage.setItem("accessToken", response.data.accessToken);
-      this.setAuthorizated(true);
+      localStorage.setItem(
+        "accessToken", 
+        response.data.accessToken
+        );
+      localStorage.setItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
       this.setUser(response.data.user);
-      return true
     } catch (e) {
       this.setErrors(
         `Произошла трагедия во время авторизации пользователя ${login}!`
@@ -62,8 +57,14 @@ export default class Store {
   async logout() {
     try {
       const response = await AuthService.logout();
-      localStorage.removeItem("accessToken", response.data.accessToken);
-      this.setAuthorizated(false);
+      localStorage.removeItem(
+        "accessToken",
+        response.data.accessToken
+      );
+      localStorage.removeItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
       this.setUser({});
     } catch (e) {
       this.setErrors(e.response.data.message);
@@ -71,17 +72,20 @@ export default class Store {
   }
 
   async checkAuthorization() {
-    this.setLoading(true);
     try {
       const response = await AuthService.refresh();
-      localStorage.setItem("accessToken", response.data.accessToken);
-      this.setAuthorizated(true);
+      localStorage.setItem(
+        "accessToken", 
+        response.data.accessToken
+        );
+      localStorage.setItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
       this.setUser(response.data.user);
     } catch (e) {
       this.setErrors(e.response?.data?.message);
       this.setUser({});
-    } finally {
-      this.setLoading(false);
     }
   }
 
@@ -94,9 +98,9 @@ export default class Store {
     }
   }
 
-  async createList(name, doctor, date, complaint) {
+  async createAppointment(name, doctor, date, complaint) {
     try {
-      const response = await ReceptionService.createList(
+      const response = await ReceptionService.createAppointment(
         name,
         doctor,
         date,
@@ -108,9 +112,9 @@ export default class Store {
     }
   }
 
-  async updateList(id, name, doctor, date, complaint) {
+  async updateAppointment(id, name, doctor, date, complaint) {
     try {
-      const response = await ReceptionService.updateList(
+      const response = await ReceptionService.updateAppointment(
         id,
         name,
         doctor,
@@ -123,9 +127,9 @@ export default class Store {
     }
   }
 
-  async deleteList(id) {
+  async deleteAppointment(id) {
     try {
-      const response = await ReceptionService.deleteList(id);
+      const response = await ReceptionService.deleteAppoitnment(id);
       return response;
     } catch (e) {
       this.setErrors("Не удалось удалить данные!");

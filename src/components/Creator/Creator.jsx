@@ -7,9 +7,8 @@ const Creator = ({ list, setList, reception, setReception }) => {
   const { name, doctor, date, complaint } = reception;
   const { store } = useContext(Context);
 
-  const createAppoint = async (e) => {
-    e.preventDefault();
-    const response = await store.createList(name, doctor, date, complaint);
+  const createAppointment = async () => {
+    const response = await store.createAppointment(name, doctor, date, complaint);
     const updatedList = [...list, response.data];
     setList(updatedList);
     setReception({
@@ -21,8 +20,8 @@ const Creator = ({ list, setList, reception, setReception }) => {
   };
 
   const handleChange = (value, type) => {
-    setReception({ ...reception, [type]: value })
-  }
+    setReception({ ...reception, [type]: value });
+  };
 
   return (
     <div className='creator'>
@@ -52,7 +51,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
           <option></option>
           {
             doctorsList.map((doctor, index) =>
-              <option value={doctor}>
+              <option value={doctor} key={`doctor-${index}`}>
                 {doctor}
               </option>
             )
@@ -86,8 +85,8 @@ const Creator = ({ list, setList, reception, setReception }) => {
       <div className='creator__block'>
         <button
           className='creator__block__add'
-          type='submit'
-          onClick={createAppoint}>
+          type='button'
+          onClick={createAppointment}>
           Добавить
         </button>
       </div>

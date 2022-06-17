@@ -57,16 +57,24 @@ const Registration = () => {
           snackOpen={snackOpen}
           setSnackOpen={setSnackOpen}
         />
-        <img className='registration__header__logo' src={logo} alt='' />
+        <img
+          className='registration__header__logo'
+          src={logo} alt=''
+        />
         <div className='registration__header__title'>
           <p>Зарегистрироваться в системе</p>
         </div>
       </div>
       <div className='registration__wrapper'>
-        <img className='registration__wrapper__icon' src={icon} alt='' />
+        <img
+          className='registration__wrapper__icon'
+          src={icon} alt=''
+        />
         <div className='registration__wrapper__form'>
           <h1 className='registration__wrapper__form__title'>Регистрация</h1>
-          <div className='registration__wrapper__form__label'><p>Логин:</p></div>
+          <div className='registration__wrapper__form__label'>
+            <p>Логин:</p>
+          </div>
           <input
             className='registration__wrapper__form__field'
             name='login'

@@ -7,8 +7,9 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   config.headers.accessToken = `${localStorage.getItem('accessToken')}`;
+  config.headers.refreshToken = `${localStorage.getItem('refreshToken')}`;
   return config;
-})
+});
 
 api.interceptors.response.use((config) => {
   return config;
