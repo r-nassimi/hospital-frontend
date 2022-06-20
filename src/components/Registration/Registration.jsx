@@ -24,7 +24,7 @@ const Registration = () => {
     setSnackText(message);
   };
 
-  const checker = async (login, password, passwordRepeat) => {
+  const checkData = async () => {
     try {
       if (!validationObject(login)) {
         openSnackbar('Логин должен содержать не менее 6 символов!');
@@ -39,7 +39,7 @@ const Registration = () => {
         return;
       }
       await store.registration(login, password);
-      navigate('/reception')
+      navigate('/reception');
     } catch (e) {
       openSnackbar(`Произошла ошибка во время регистрации пользователя`)
     }
@@ -71,7 +71,9 @@ const Registration = () => {
           src={icon} alt=''
         />
         <div className='registration__wrapper__form'>
-          <h1 className='registration__wrapper__form__title'>Регистрация</h1>
+          <h1 className='registration__wrapper__form__title'>
+            Регистрация
+            </h1>
           <div className='registration__wrapper__form__label'>
             <p>Логин:</p>
           </div>
@@ -102,7 +104,7 @@ const Registration = () => {
           <button
             className='registration__wrapper__form__registrate'
             type='button'
-            onClick={() => checker(login, password, passwordRepeat)}
+            onClick={checkData}
           >
             Зарегистрироваться
           </button>

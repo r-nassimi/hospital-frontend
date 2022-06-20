@@ -15,10 +15,14 @@ api.interceptors.response.use((config) => {
   return config;
 }, async (error) => {
   const originalRequest = error.config;
-  if (error.response.status === 401 && originalRequest && !originalRequest._isRetry) {
+  if (error.response.status === 500 && originalRequest && !originalRequest._isRetry) {
     originalRequest._isRetry = true;
-    await api.get(`/refresh`);
-    return api.request(originalRequest);
+    try {
+      await api.get(`/refresh`);
+      return api.request(originalRequest);
+    } catch (e) {
+      alert(e)
+    }
   } else {
     throw error;
   };

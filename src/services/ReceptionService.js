@@ -13,18 +13,4 @@ export default class ReceptionService {
       complaint 
     });
   };
-
-  static updateAppointment(id, name, doctor, date, complaint) {
-    return api.patch(`/updateList`, {
-      id,
-      name,
-      doctor,
-      date,
-      complaint,
-    });
-  };
-
-  static deleteAppointment(id) {
-    return api.delete(`/deleteList`, { id });
-  }
 };

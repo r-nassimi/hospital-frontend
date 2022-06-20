@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from 'src/index';
 import Snackbars from 'src/Snackbars/Snackbars';
@@ -23,7 +23,7 @@ const Login = () => {
     setSnackText(text);
   };
 
-  const checker = async () => {
+  const checkData = async () => {
     try {
       if (!validationObject(login)) {
         openSnackbar('Логин некорректен!');
@@ -57,7 +57,9 @@ const Login = () => {
           src={logo} alt=''
         />
         <div className='login__header__title'>
-          Войти в систему
+          <p>
+            Войти в систему
+          </p>
         </div>
       </div>
       <div className='login__wrapper'>
@@ -66,7 +68,9 @@ const Login = () => {
           src={icon} alt=''
         />
         <div className='login__wrapper__form'>
-          <h1 className='login__wrapper__form__title'>Войти в систему</h1>
+          <h1 className='login__wrapper__form__title'>
+            Войти в систему
+            </h1>
           <div className='login__wrapper__form__label'>
             <p>Логин:</p>
           </div>
@@ -90,7 +94,7 @@ const Login = () => {
           <button
             className='login__wrapper__form__authorization'
             type='button'
-            onClick={checker}
+            onClick={checkData}
           >
             Войти
           </button>

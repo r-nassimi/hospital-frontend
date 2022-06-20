@@ -40,7 +40,7 @@ const Reception = () => {
         <div className='reception__header__button'>
           <button
             className='reception__header__button__logout'
-            onClick={() => logout()}
+            onClick={logout}
           >
             Выход
           </button>

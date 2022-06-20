@@ -1,27 +1,37 @@
 import { useEffect, useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Context } from "src/index";
 import Registration from "src/components/Registration/Registration";
 import Login from "src/components/Login/Login";
 import Reception from "src/components/Reception/Reception";
+import SecureRoute from "src/components/Security/Security";
 import "src/App/app.scss";
 
 const App = () => {
   const { store } = useContext(Context);
 
   useEffect(() => {
-    store.checkAuthorization();
+    if(localStorage.getItem("accessToken")) {
+      tokenRefresh();
+    }
   }, []);
+
+  const tokenRefresh = async () => {
+    await store.checkAuthorization()
+    return;
+  }
 
   return (
     <div className="App">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/reception" element={<Reception />} />
 
         {/* Redirect from empty adress to login form */}
-        <Route path="/" element={<Navigate replace to="/login" />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/" element={<SecureRoute />}>
+          <Route path="/reception" element={<Reception />} />
+        </Route>
       </Routes>
     </div>
   );
