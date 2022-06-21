@@ -7,7 +7,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
   const { store } = useContext(Context);
 
   const createAppointment = async () => {
-    const {name, doctor, date, complaint} = reception;
+    const { name, doctor, date, complaint } = reception;
     const response = await store.createAppointment(name, doctor, date, complaint);
     const updatedList = [...list, response.data];
     setList(updatedList);
@@ -83,7 +83,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
         <button
           className='creator__block__add'
           type='button'
-          disabled = {checker}
+          disabled={checker}
           onClick={createAppointment}>
           Добавить
         </button>

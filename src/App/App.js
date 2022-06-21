@@ -11,13 +11,13 @@ const App = () => {
   const { store } = useContext(Context);
 
   useEffect(() => {
-      tokenRefresh();
+    tokenRefresh();
   }, []);
 
   const tokenRefresh = async () => {
-    await store.checkAuthorization()
+    await store.checkAuthorization();
     return;
-  }
+  };
 
   return (
     <div className="App">

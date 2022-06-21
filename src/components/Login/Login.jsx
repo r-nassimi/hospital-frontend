@@ -70,7 +70,7 @@ const Login = () => {
         <div className='login__wrapper__form'>
           <h1 className='login__wrapper__form__title'>
             Войти в систему
-            </h1>
+          </h1>
           <div className='login__wrapper__form__label'>
             <p>Логин:</p>
           </div>

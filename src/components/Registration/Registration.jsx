@@ -73,7 +73,7 @@ const Registration = () => {
         <div className='registration__wrapper__form'>
           <h1 className='registration__wrapper__form__title'>
             Регистрация
-            </h1>
+          </h1>
           <div className='registration__wrapper__form__label'>
             <p>Логин:</p>
           </div>
