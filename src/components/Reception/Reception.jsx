@@ -18,10 +18,10 @@ const Reception = () => {
   const { store } = useContext(Context);
 
   useEffect(() => {
-    getAll();
+    userAppointments();
   }, []);
 
-  const getAll = async () => {
+  const userAppointments = async () => {
     const response = await store.getList();
     setList(response.data);
   };
@@ -29,7 +29,6 @@ const Reception = () => {
   const logout = async () => {
     await store.logout();
     navigate('/login');
-    return;
   };
 
   return (

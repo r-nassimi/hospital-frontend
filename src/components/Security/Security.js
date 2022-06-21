@@ -3,9 +3,7 @@ import { Navigate, Outlet } from "react-router";
 const useAuth = () => {
   const token = localStorage.getItem("accessToken");
   if (token) {
-    return true;
-  } else {
-    return false;
+    return token ? true : false;
   }
 };
 

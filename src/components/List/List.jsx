@@ -13,8 +13,7 @@ const List = ({ list }) => {
             tableHeader.map(th =>
               <th
                 className='list__table__header'
-                key={`header-${th.id}`}
-              >
+                key={`header-${th.id}`}>
                 {th.label}
               </th>
             )
@@ -25,22 +24,18 @@ const List = ({ list }) => {
                 className='list__table__line'
                 key={`list-${_id}`}
               >
-                <td className='list__table__line__data'
-                >
+                <td className='list__table__line__data'>
                   {name}
                 </td>
-                <td className='list__table__line__data'
-                >
+                <td className='list__table__line__data'>
                   {doctor}
                 </td>
-                <td className='list__table__line__data'
-                >
+                <td className='list__table__line__data'>
                   <Moment format='DD-MM-YYYY'>
                     {date}
                   </Moment>
                 </td>
-                <td className='list__table__line__data'
-                >
+                <td className='list__table__line__data'>
                   {complaint}
                 </td>
                 <td className='list__table__line__data'>

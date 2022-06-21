@@ -11,9 +11,7 @@ const App = () => {
   const { store } = useContext(Context);
 
   useEffect(() => {
-    if(localStorage.getItem("accessToken")) {
       tokenRefresh();
-    }
   }, []);
 
   const tokenRefresh = async () => {

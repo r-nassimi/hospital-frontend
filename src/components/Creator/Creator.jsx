@@ -4,10 +4,10 @@ import { doctorsList } from "src/constants";
 import './style.scss';
 
 const Creator = ({ list, setList, reception, setReception }) => {
-  const { name, doctor, date, complaint } = reception;
   const { store } = useContext(Context);
 
   const createAppointment = async () => {
+    const {name, doctor, date, complaint} = reception;
     const response = await store.createAppointment(name, doctor, date, complaint);
     const updatedList = [...list, response.data];
     setList(updatedList);
@@ -18,6 +18,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
       complaint: ''
     });
   };
+  const checker = !reception.name || !reception.doctor || !reception.date || !reception.complaint;
 
   const handleChange = (value, type) => {
     setReception({ ...reception, [type]: value });
@@ -32,7 +33,6 @@ const Creator = ({ list, setList, reception, setReception }) => {
         <input
           className='creator__block__input'
           type='text'
-          value={name}
           id='name'
           onChange={(e) => handleChange(e.target.value, 'name')}
         />
@@ -44,7 +44,6 @@ const Creator = ({ list, setList, reception, setReception }) => {
         <select
           className='creator__block__input'
           type='text'
-          value={doctor}
           id='doctor'
           onChange={(e) => handleChange(e.target.value, 'doctor')}
         >
@@ -65,7 +64,6 @@ const Creator = ({ list, setList, reception, setReception }) => {
         <input
           className='creator__block__input'
           type='date'
-          value={date}
           id='date'
           onChange={(e) => handleChange(e.target.value, 'date')}
         />
@@ -77,7 +75,6 @@ const Creator = ({ list, setList, reception, setReception }) => {
         <input
           className='creator__block__input'
           type='text'
-          value={complaint}
           id='complaint'
           onChange={(e) => handleChange(e.target.value, 'complaint')}
         />
@@ -86,6 +83,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
         <button
           className='creator__block__add'
           type='button'
+          disabled = {checker}
           onClick={createAppointment}>
           Добавить
         </button>

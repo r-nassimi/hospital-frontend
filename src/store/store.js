@@ -19,10 +19,7 @@ export default class Store {
         login,
         password
       );
-      localStorage.setItem(
-        "accessToken", 
-        response.data.accessToken
-        );
+      localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem(
         "refreshToken",
         response.data.refreshToken
@@ -38,10 +35,7 @@ export default class Store {
   async login(login, password) {
     try {
       const response = await AuthService.login(login, password);
-      localStorage.setItem(
-        "accessToken", 
-        response.data.accessToken
-        );
+      localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem(
         "refreshToken",
         response.data.refreshToken
@@ -73,16 +67,18 @@ export default class Store {
 
   async checkAuthorization() {
     try {
-      const response = await AuthService.refresh();
-      localStorage.setItem(
-        "accessToken", 
-        response.data.accessToken
+      if (localStorage.getItem("accessToken")) {
+        const response = await AuthService.refresh();
+        localStorage.setItem(
+          "accessToken",
+          response.data.accessToken
         );
-      localStorage.setItem(
-        "refreshToken",
-        response.data.refreshToken
-      );
-      this.setUser(response.data.user);
+        localStorage.setItem(
+          "refreshToken",
+          response.data.refreshToken
+        );
+        this.setUser(response.data.user);
+      }
     } catch (e) {
       this.setErrors(e.response?.data?.message);
       this.setUser({});
