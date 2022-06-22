@@ -27,7 +27,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
   return (
     <div className='creator'>
       <div className='creator__block'>
-        <label for='name'>
+        <label htmlFor='name'>
           Имя
         </label>
         <input
@@ -38,7 +38,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
         />
       </div>
       <div className='creator__block'>
-        <label for='doctor'>
+        <label htmlFor='doctor'>
           Доктор
         </label>
         <select
@@ -58,7 +58,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
         </select>
       </div>
       <div className='creator__block'>
-        <label for='date'>
+        <label htmlFor='date'>
           Дата
         </label>
         <input
@@ -69,7 +69,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
         />
       </div>
       <div className='creator__block'>
-        <label for='complaint'>
+        <label htmlFor='complaint'>
           Жалоба
         </label>
         <input
@@ -85,7 +85,7 @@ const Creator = ({ list, setList, reception, setReception }) => {
           type='button'
           disabled={checker}
           onClick={createAppointment}>
-          Добавить
+            Добавить
         </button>
       </div>
     </div>

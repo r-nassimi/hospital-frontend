@@ -11,13 +11,8 @@ const App = () => {
   const { store } = useContext(Context);
 
   useEffect(() => {
-    tokenRefresh();
+    store.checkAuthorization();
   }, []);
-
-  const tokenRefresh = async () => {
-    await store.checkAuthorization();
-    return;
-  };
 
   return (
     <div className="App">
