@@ -1,20 +1,20 @@
-import { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Context } from 'src/index';
-import Snackbars from 'src/Snackbars/Snackbars';
-import { validationObject } from 'src/helper/helper-validate';
-import logo from 'src/logos/mainLogo.svg';
-import icon from 'src/logos/buildings.svg';
-import './style.scss';
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "src/index";
+import Snackbars from "src/Snackbars/Snackbars";
+import { validationObject } from "src/helper/helper-validate";
+import logo from "src/logos/mainLogo.svg";
+import icon from "src/logos/buildings.svg";
+import "./style.scss";
 
 const Login = () => {
   const [user, setUser] = useState({
-    login: '',
-    password: '',
+    login: "",
+    password: "",
   });
   const { login, password } = user;
   const navigate = useNavigate();
-  const [snackText, setSnackText] = useState('');
+  const [snackText, setSnackText] = useState("");
   const [snackOpen, setSnackOpen] = useState(false);
   const { store } = useContext(Context);
 
@@ -26,15 +26,15 @@ const Login = () => {
   const checkData = async () => {
     try {
       if (!validationObject(login)) {
-        openSnackbar('Логин некорректен!');
+        openSnackbar("Логин некорректен!");
         return;
       }
       if (!validationObject(password)) {
-        openSnackbar('Пароль некорректен!');
+        openSnackbar("Пароль некорректен!");
         return;
       }
       await store.login(login, password);
-      navigate('/reception');
+      navigate("/reception");
     } catch (e) {
       openSnackbar(`Произошла ошибка во время авторизации пользователя`);
     };
@@ -45,62 +45,62 @@ const Login = () => {
   };
 
   return (
-    <div className='login'>
-      <div className='login__header'>
+    <div className="login">
+      <div className="login__header">
         <Snackbars
           snackText={snackText}
           snackOpen={snackOpen}
           setSnackOpen={setSnackOpen}
         />
         <img
-          className='login__header__logo'
-          src={logo} alt=''
+          className="login__header__logo"
+          src={logo} alt=""
         />
-        <div className='login__header__title'>
+        <div className="login__header__title">
           <p>
             Войти в систему
           </p>
         </div>
       </div>
-      <div className='login__wrapper'>
+      <div className="login__wrapper">
         <img
-          className='login__wrapper__icon'
-          src={icon} alt=''
+          className="login__wrapper__icon"
+          src={icon} alt=""
         />
-        <div className='login__wrapper__form'>
-          <h1 className='login__wrapper__form__title'>
+        <div className="login__wrapper__form">
+          <h1 className="login__wrapper__form__title">
             Войти в систему
           </h1>
-          <div className='login__wrapper__form__label'>
+          <div className="login__wrapper__form__label">
             <p>Логин:</p>
           </div>
           <input
-            className='login__wrapper__form__field'
-            type='text'
-            placeholder='Логин'
+            className="login__wrapper__form__field"
+            type="text"
+            placeholder="Логин"
             value={login}
-            onChange={(e) => handleChange(e.target.value, 'login')}
+            onChange={(e) => handleChange(e.target.value, "login")}
           />
-          <div className='login__wrapper__form__label'>
+          <div className="login__wrapper__form__label">
             <p>Пароль:</p>
           </div>
           <input
-            className='login__wrapper__form__field'
-            type='password'
-            placeholder='Пароль'
+            className="login__wrapper__form__field"
+            type="password"
+            placeholder="Пароль"
             value={password}
-            onChange={(e) => handleChange(e.target.value, 'password')}
+            onChange={(e) => handleChange(e.target.value, "password")}
           />
           <button
-            className='login__wrapper__form__authorization'
-            type='button'
+            className="login__wrapper__form__authorization"
+            type="button"
             onClick={checkData}
           >
             Войти
           </button>
           <Link
-            to='/registration'
-            className='login__wrapper__form__registration'
+            to="/registration"
+            className="login__wrapper__form__registration"
           >
             Зарегистрироваться
           </Link>
