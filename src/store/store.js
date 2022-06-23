@@ -67,18 +67,13 @@ export default class Store {
 
   async checkAuthorization() {
     try {
-      if (localStorage.getItem("accessToken")) {
-        const response = await AuthService.refresh();
-        localStorage.setItem(
-          "accessToken",
-          response.data.accessToken
-        );
-        localStorage.setItem(
-          "refreshToken",
-          response.data.refreshToken
-        );
-        this.setUser(response.data.user);
-      }
+      const response = await AuthService.refresh();
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
+      this.setUser(response.data.user);
     } catch (e) {
       this.setErrors(e.response?.data?.message);
       this.setUser({});
@@ -108,10 +103,10 @@ export default class Store {
     }
   }
 
-  async updateAppointment(id, name, doctor, date, complaint) {
+  async updateAppointment(_id, name, doctor, date, complaint) {
     try {
       const response = await ReceptionService.updateAppointment(
-        id,
+        _id,
         name,
         doctor,
         date,
@@ -123,10 +118,9 @@ export default class Store {
     }
   }
 
-  async deleteAppointment(id) {
+  async deleteAppointment(_id) {
     try {
-      const response = await ReceptionService.deleteAppoitnment(id);
-      return response;
+      const response = await ReceptionService.deleteAppointment(_id);
     } catch (e) {
       this.setErrors("Не удалось удалить данные!");
     }
