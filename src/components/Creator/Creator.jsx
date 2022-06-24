@@ -1,23 +1,24 @@
 import { useContext } from "react";
-import { Context } from "src/index";
+import { Context } from "src";
 import { doctorsList } from "src/constants";
 import "./style.scss";
 
 const Creator = ({ list, setList, reception, setReception }) => {
+  const { name, doctor, date, complaint } = reception;
   const { store } = useContext(Context);
 
   const createAppointment = async () => {
-    const { name, doctor, date, complaint } = reception;
     const response = await store.createAppointment(name, doctor, date, complaint);
     const updatedList = [...list, response.data];
     setList(updatedList);
     setReception({
-      name: '',
-      doctor: '',
-      date: '',
-      complaint: ''
+      name: "",
+      doctor: "",
+      date: "",
+      complaint: ""
     });
   };
+
   const checker = !reception.name || !reception.doctor || !reception.date || !reception.complaint;
 
   const handleChange = (value, type) => {
@@ -27,23 +28,25 @@ const Creator = ({ list, setList, reception, setReception }) => {
   return (
     <div className="creator">
       <div className="creator__block">
-        <label htmlFor="name">
+        <label for="name">
           Имя
         </label>
         <input
           className="creator__block__input"
           type="text"
+          value={name}
           id="name"
           onChange={(e) => handleChange(e.target.value, "name")}
         />
       </div>
       <div className="creator__block">
-        <label htmlFor="doctor">
+        <label for="doctor">
           Доктор
         </label>
         <select
           className="creator__block__input"
           type="text"
+          value={doctor}
           id="doctor"
           onChange={(e) => handleChange(e.target.value, "doctor")}
         >
@@ -58,23 +61,25 @@ const Creator = ({ list, setList, reception, setReception }) => {
         </select>
       </div>
       <div className="creator__block">
-        <label htmlFor="date">
+        <label for="date">
           Дата
         </label>
         <input
           className="creator__block__input"
           type="date"
+          value={date}
           id="date"
           onChange={(e) => handleChange(e.target.value, "date")}
         />
       </div>
       <div className="creator__block">
-        <label htmlFor='complaint'>
+        <label for="complaint">
           Жалоба
         </label>
         <input
           className="creator__block__input"
           type="text"
+          value={complaint}
           id="complaint"
           onChange={(e) => handleChange(e.target.value, "complaint")}
         />

@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Context } from "src/index";
+import { Context } from "src";
 import Snackbars from "src/Snackbars/Snackbars";
 import { validationObject } from "src/helper/helper-validate";
 import logo from "src/logos/mainLogo.svg";
@@ -14,10 +14,10 @@ const Registration = () => {
     passwordRepeat: ""
   });
   const { login, password, passwordRepeat } = user;
-  const navigate = useNavigate();
   const [snackText, setSnackText] = useState("");
   const [snackOpen, setSnackOpen] = useState(false);
-  const { store } = useContext(Context);
+  const { store } = useContext(Context); 
+  const navigate = useNavigate();
 
   const openSnackbar = (message) => {
     setSnackOpen(true);
@@ -57,26 +57,16 @@ const Registration = () => {
           snackOpen={snackOpen}
           setSnackOpen={setSnackOpen}
         />
-        <img
-          className="registration__header__logo"
-          src={logo} alt=""
-        />
+        <img className="registration__header__logo" src={logo} alt="" />
         <div className="registration__header__title">
           <p>Зарегистрироваться в системе</p>
         </div>
       </div>
       <div className="registration__wrapper">
-        <img
-          className="registration__wrapper__icon"
-          src={icon} alt=""
-        />
+        <img className="registration__wrapper__icon" src={icon} alt="" />
         <div className="registration__wrapper__form">
-          <h1 className="registration__wrapper__form__title">
-            Регистрация
-          </h1>
-          <div className="registration__wrapper__form__label">
-            <p>Логин:</p>
-          </div>
+          <h1 className="registration__wrapper__form__title">Регистрация</h1>
+          <div className="registration__wrapper__form__label">Логин:</div>
           <input
             className="registration__wrapper__form__field"
             name="login"
@@ -93,7 +83,7 @@ const Registration = () => {
             value={password}
             onChange={(e) => handleChange(e.target.value, "password")}
           />
-          <div className="registration__wrapper__form__label"><p>Повторите пароль:</p></div>
+          <div className="registration__wrapper__form__label">Повторите пароль:</div>
           <input
             className="registration__wrapper__form__field"
             type="password"
@@ -101,13 +91,13 @@ const Registration = () => {
             value={passwordRepeat}
             onChange={(e) => handleChange(e.target.value, "passwordRepeat")}
           />
-          <button
-            className="registration__wrapper__form__registrate"
-            type="button"
-            onClick={checkData}
-          >
-            Зарегистрироваться
-          </button>
+            <button
+              className="registration__wrapper__form__registrate"
+              type="button"
+              onClick={checkData}
+            >
+              Зарегистрироваться
+            </button>
           <Link to="/login"
             className="registration__wrapper__form__authorizate"
           >

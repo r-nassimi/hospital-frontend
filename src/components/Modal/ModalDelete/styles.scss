@@ -1,36 +1,79 @@
-.modalWrap{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    opacity: 0;
-    pointer-events: none;
+.modalWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  background: rgba(196, 196, 196, 0.829);
+
+  &.active {
     transition: 0.3s;
-    padding: 50px;
-    background: rgba(196, 196, 196, 0.829);
-    opacity: 0;
-}
-.modalWrap_active{
-    transition: 0.3s;
-    padding: 50px;
-    background-color: #fff;
     opacity: 1;
     pointer-events: all;
+  }
 }
 
-.modal{
-    background-color: #fff;
-    transform: scale(0.5);
-    overflow: hidden;
-    transition: 0.2s;
-    width: 600px;
-    border-radius: 4px;
-    height: auto;
-}
+.modal {
+  background-color: #fff;
+  transform: scale(0.5);
+  overflow: hidden;
+  transition: 0.2s;
+  width: 600px;
+  border-radius: 4px;
+  height: auto;
 
-.modal_active{
+  &.active {
     transition: 0.2s;
     transform: scale(1);
+  }
+
+  &__header {
+    display: flex;
+    box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px 30px;
+  }
+
+  &__label {
+    margin: 30px 45px;
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    min-height: 80px;
+  }
+
+  &__function {
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px 30px;
+
+    &__button {
+      transition: 0, 2s;
+      margin-left: 12px;
+      background-color: #fff;
+      border: 2px solid rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      border-radius: 4px;
+      padding: 10px 45px;
+      font-size: 18px;
+      font-weight: 300;
+      font-style: normal;
+      line-height: 21px;
+      padding: 10px 45px;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(197, 233, 255, 0.72);
+        border: 2px solid rgba(197, 233, 255, 0.72);
+        transition: 0.2s;
+      }
+    }
+  }
 }

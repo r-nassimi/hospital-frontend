@@ -9,3 +9,29 @@ export const tableHeader = [
   { id: 4, label: "Жалоба" },
   { id: 5, label: "" },
 ];
+
+export const fields = [
+  {
+    name: "Имя",
+    value: "name",
+  },
+  {
+    name: "Доктор",
+    value: "doctor",
+  },
+  {
+    name: "Дата",
+    value: "date",
+  },
+];
+
+export const direction = [
+  {
+    value: "asc",
+    way: "По возрастанию",
+  },
+  {
+    value: "desc",
+    way: "По убыванию",
+  },
+];

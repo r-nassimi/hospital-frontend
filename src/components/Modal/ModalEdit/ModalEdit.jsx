@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { doctorsList } from "src/constants";
-import 'src/components/Modal/ModalEdit/styles.scss';
+import "src/components/Modal/ModalEdit/styles.scss";
 
-const ModalEdit = ({ setModalEditOpen, editAppointment, ticket }) => {
-  const { _id, name, doctor, date, complaint } = ticket;
+const ModalEdit = ({ modalEditOpen, setModalEditOpen, editAppointment, chooseAppointment }) => {
+  const { _id, name, doctor, date, complaint } = chooseAppointment;
   const [modalInput, setModalInput] = useState({
     modalName: name,
     modalDoctor: doctor,
@@ -19,27 +19,29 @@ const ModalEdit = ({ setModalEditOpen, editAppointment, ticket }) => {
   const checker = !modalName || !modalDoctor || !modalDate || !modalComplaint;
 
   return (
-    <div className="modal__edit">
-      <div className="modal__edit__block">
-        <div className='modal__edit__header'>
-          Изменить приём
+    <div className={modalEditOpen ? "modalWrap active" : "modalWrap"} onClick={() => setModalEditOpen(false)}>
+      <div className={modalEditOpen ? "modal active" : "modal"} onClick={(e) => e.stopPropagation()}>
+        <div className="modal__header">
+          <p>Изменить приём</p>
         </div>
-        <div className="modal__edit__block__input">
-          <label htmlFor='modal__edit__input__label'>Имя</label>
+        <div className="modal__form">
+          <label htmlFor="modalName">
+            Имя
+          </label>
           <input
-            className="modal__edit__block__input__area"
-            placeholder="name"
-            type='text'
+            className="modal__form__input"
+            type="text"
             value={modalName}
-            onChange={(e) => handleChange(e.target.value, 'modalName')}
-          />
-          <label htmlFor='modal__edit__input__label'>Доктор</label>
+            onChange={(e) => handleChange(e.target.value, "modalName")} />
+          <label htmlFor="modalDoctor">
+            Доктор
+          </label>
           <select
-            className="modal__edit__block__input__area"
+            className="modal__form__input"
             placeholder="doctor"
-            type='select'
+            type="select"
             value={modalDoctor}
-            onChange={(e) => handleChange(e.target.value, 'modalDoctor')}
+            onChange={(e) => handleChange(e.target.value, "modalDoctor")}
           >
             {
               doctorsList.map((doctor, index) =>
@@ -49,35 +51,36 @@ const ModalEdit = ({ setModalEditOpen, editAppointment, ticket }) => {
               )
             }
           </select>
-          <label htmlFor='modal__edit__input__label'>Дата</label>
+          <label htmlFor="modalDate">
+            Дата
+          </label>
           <input
-            className="modal__edit__block__input__area"
-            placeholder="date"
-            type='text'
+            className="modal__form__input"
+            type="date"
             value={modalDate}
-            onChange={(e) => handleChange(e.target.value, 'modalDate')}
-          />
-          <label htmlFor='modal__edit__input__label'>Жалоба</label>
+            onChange={(e) => handleChange(e.target.value, "modalDate")} />
+          <label htmlFor="modalComplaint"></label>
+          Жалоба
           <input
-            className="modal__edit__block__input__area"
-            placeholder="complaint"
-            type='text'
+            className="modal__form__input"
+            type="text"
             value={modalComplaint}
-            onChange={(e) => handleChange(e.target.value, 'modalComplaint')}
-          />
-          <div className="modal__edit__block__buttons">
-            <button
+            onChange={(e) => handleChange(e.target.value, "modalComplaint")} />
+        </div>
+        <div className="modal__function">
+          <button
+            className="modal__function__button"
             type="button"
-              onClick={() => setModalEditOpen(false)}>
-              Отмена
-            </button>
-            <button
-              type="button"
-              disabled={checker}
-              onClick={() => editAppointment(modalInput, _id)}>
-              Редактировать
-            </button>
-          </div>
+            onClick={() => setModalEditOpen(false)}>
+            Отмена
+          </button>
+          <button
+            className="modal__function__button"
+            type="button"
+            disabled={checker}
+            onClick={() => editAppointment(modalInput, _id)}>
+            Редактировать
+          </button>
         </div>
       </div>
     </div>

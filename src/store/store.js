@@ -103,10 +103,10 @@ export default class Store {
     }
   }
 
-  async updateAppointment(_id, name, doctor, date, complaint) {
+  async updateAppointment(id, name, doctor, date, complaint) {
     try {
       const response = await ReceptionService.updateAppointment(
-        _id,
+        id,
         name,
         doctor,
         date,

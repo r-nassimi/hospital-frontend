@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Context } from "src/index";
+import { Context } from "src";
 import Registration from "src/components/Registration/Registration";
 import Login from "src/components/Login/Login";
 import Reception from "src/components/Reception/Reception";

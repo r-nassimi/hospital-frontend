@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Context } from "src/index";
+import { Context } from "src";
 import Snackbars from "src/Snackbars/Snackbars";
 import { validationObject } from "src/helper/helper-validate";
 import logo from "src/logos/mainLogo.svg";
@@ -70,7 +70,7 @@ const Login = () => {
         <div className="login__wrapper__form">
           <h1 className="login__wrapper__form__title">
             Войти в систему
-          </h1>
+            </h1>
           <div className="login__wrapper__form__label">
             <p>Логин:</p>
           </div>
