@@ -41,27 +41,23 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 200px;
+    margin: 330px;
     margin-top: 200px;
 
     &__icon {
       align-items: center;
       justify-content: center;
-      width: 380px;
-      height: 380px;
+      width: 370px;
+      height: 370px;
       margin-left: 100px;
-      top: 65px;
-      left: 38px;
     }
 
     &__form {
       flex-direction: column;
       background-color: #FFFFFF;
-      top: 160px;
-      left: 540px;
       width: 400px;
       height: 480px;
-      margin-left: 50px;
+      margin-left: 80px;
 
       &__title {
         width: 280px;

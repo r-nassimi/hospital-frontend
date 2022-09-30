@@ -10,7 +10,7 @@ const Snackbars = ({ snackText, snackOpen, setSnackOpen }) => {
         open={snackOpen}
         onClose={handleClose}
         message={snackText}
-      ></Snackbar>
+      />
     </div>
   );
 };
