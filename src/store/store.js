@@ -1,28 +1,17 @@
-import axios from "axios";
 import AuthService from "src/services/AuthorizationService";
-import { API_URL } from "src/constants";
+import ReceptionService from "src/services/ReceptionService";
 
 export default class Store {
   user = {};
-  authorizated = false;
-  loading = false;
   errors = "";
 
   setUser(user) {
     this.user = user;
-  };
-
-  setAuthorizated(boolean) {
-    this.authorizated = boolean;
-  };
-
-  setLoading(boolean) {
-    this.loading = boolean;
-  };
+  }
 
   setErrors(error) {
     this.errors = error;
-  };
+  }
 
   async registration(login, password) {
     try {
@@ -30,66 +19,110 @@ export default class Store {
         login,
         password
       );
-      localStorage.setItem("token", response.data.accessToken);
-      this.setAuthorizated(true);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
       this.setUser(response.data.user);
     } catch (e) {
       this.setErrors(
         `Произошла трагедия во время регистрации пользователя ${login}!`
       );
-    };
-  };
+    }
+  }
 
   async login(login, password) {
     try {
       const response = await AuthService.login(login, password);
-      localStorage.setItem("token", response.data.accessToken);
-      this.setAuthorizated(true);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
       this.setUser(response.data.user);
     } catch (e) {
       this.setErrors(
         `Произошла трагедия во время авторизации пользователя ${login}!`
-        );
-    };
-  };
+      );
+    }
+  }
 
   async logout() {
     try {
       const response = await AuthService.logout();
-      localStorage.removeItem("token");
-      this.setAuthorizated(false);
+      localStorage.removeItem(
+        "accessToken",
+        response.data.accessToken
+      );
+      localStorage.removeItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
       this.setUser({});
     } catch (e) {
       this.setErrors(e.response.data.message);
-    };
-  };
+    }
+  }
 
   async checkAuthorization() {
-    this.setLoading(true);
     try {
-      const response = await axios.get(`${API_URL}/refresh`, {
-        withCredentials: true,
-      });
-      localStorage.setItem("token", response.data.accessToken);
-      this.setAuthorizated(true);
+      const response = await AuthService.refresh();
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem(
+        "refreshToken",
+        response.data.refreshToken
+      );
       this.setUser(response.data.user);
     } catch (e) {
-      this.setErrors(e.response.data.message);
-    } finally {
-      this.setLoading(false);
-    };
-  };
-
-  async refresh() {
-    try {
-      const response = await axios.get(`${API_URL}/refresh`, {
-        withCredentials: true,
-      });
-      localStorage.setItem('token', response.data.accessToken);
-    } catch (e) {
-      this.setErrors('Не авторизован!')
-      localStorage.clear();
+      this.setErrors(e.response?.data?.message);
       this.setUser({});
-    };
-  };
-};
+    }
+  }
+
+  async getList() {
+    try {
+      const response = await ReceptionService.getList();
+      return response;
+    } catch (e) {
+      this.setErrors(e.response?.data?.message);
+    }
+  }
+
+  async createAppointment(name, doctor, date, complaint) {
+    try {
+      const response = await ReceptionService.createAppointment(
+        name,
+        doctor,
+        date,
+        complaint
+      );
+      return response;
+    } catch (e) {
+      this.setErrors("Не удалось создать данные!");
+    }
+  }
+
+  async updateAppointment(id, name, doctor, date, complaint) {
+    try {
+      const response = await ReceptionService.updateAppointment(
+        id,
+        name,
+        doctor,
+        date,
+        complaint
+      );
+      return response;
+    } catch (e) {
+      this.setErrors("Не удалось обновить данные!");
+    }
+  }
+
+  async deleteAppointment(_id) {
+    try {
+      const response = await ReceptionService.deleteAppointment(_id);
+    } catch (e) {
+      this.setErrors("Не удалось удалить данные!");
+    }
+  }
+}
